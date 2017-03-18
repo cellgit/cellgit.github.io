@@ -5,7 +5,7 @@
     <entry>
       <title><![CDATA[The First 测试]]></title>
       <url>%2F2017%2F02%2F18%2FThe%20First%2F</url>
-      <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "测试" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+      <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. 在AppDelegate中写入以下代码: 1234567891011121314151617#import &quot;AppDelegate.h&quot;#import &quot;QMUIConfigurationTemplate.h&quot;@interface AppDelegate ()@end@implementation AppDelegate- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions &#123;// 启动QMUI的配置模板[QMUIConfigurationTemplate setupConfigurationTemplate];// 将全局的控件样式渲染出来[QMUIConfigurationManager renderGlobalAppearances];return YES;&#125; Quick StartCreate a new post1$ hexo new "测试" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
     </entry>
 
     
