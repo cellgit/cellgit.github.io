@@ -87,23 +87,15 @@
 
 
 
-<meta name="description" content="1. 启动QMUI的配置模板和渲染全局控件样式在AppDelegate中写入以下代码:
-1234567891011121314151617#import &amp;quot;AppDelegate.h&amp;quot;#import &amp;quot;QMUIConfigurationTemplate.h&amp;quot;@interface AppDelegate ()@end@implementation AppDel">
+<meta name="description" content="如果不曾相见,人们就不会相恋">
 <meta property="og:type" content="website">
-<meta property="og:title" content="腾讯QMUI使用方法(iOS)">
-<meta property="og:url" content="http://yoursite.com/iOS游戏开发笔记.html">
+<meta property="og:title" content="刘宏立的博客">
+<meta property="og:url" content="http://yoursite.com/archives/2017/03/index.html">
 <meta property="og:site_name" content="刘宏立的博客">
-<meta property="og:description" content="1. 启动QMUI的配置模板和渲染全局控件样式在AppDelegate中写入以下代码:
-1234567891011121314151617#import &amp;quot;AppDelegate.h&amp;quot;#import &amp;quot;QMUIConfigurationTemplate.h&amp;quot;@interface AppDelegate ()@end@implementation AppDel">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-5738554d064850b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-6e77646880694ce2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-ba27a5ee90344f8a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-03-18T03:49:43.000Z">
+<meta property="og:description" content="如果不曾相见,人们就不会相恋">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="腾讯QMUI使用方法(iOS)">
-<meta name="twitter:description" content="1. 启动QMUI的配置模板和渲染全局控件样式在AppDelegate中写入以下代码:
-1234567891011121314151617#import &amp;quot;AppDelegate.h&amp;quot;#import &amp;quot;QMUIConfigurationTemplate.h&amp;quot;@interface AppDelegate ()@end@implementation AppDel">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2553151-5738554d064850b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="刘宏立的博客">
+<meta name="twitter:description" content="如果不曾相见,人们就不会相恋">
 
 
 
@@ -131,19 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/iOS游戏开发笔记.html"/>
+  <link rel="canonical" href="http://yoursite.com/archives/2017/03/"/>
 
 
 
 
 
-  <title>
-  
-
-  
-    腾讯QMUI使用方法(iOS) | 刘宏立的博客
-  
-</title>
+  <title> 归档 | 刘宏立的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -178,7 +164,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left  page-archive  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -324,39 +310,103 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-  <header class="post-header">
+  <section id="posts" class="posts-collapse">
+    <span class="archive-move-on"></span>
 
-	<h2 class="post-title" itemprop="name headline">腾讯QMUI使用方法(iOS)</h2>
-
-
-
-</header>
-
-    
-    
-      <h2 id="1-启动QMUI的配置模板和渲染全局控件样式"><a href="#1-启动QMUI的配置模板和渲染全局控件样式" class="headerlink" title="1. 启动QMUI的配置模板和渲染全局控件样式"></a>1. 启动QMUI的配置模板和渲染全局控件样式</h2><p>在AppDelegate中写入以下代码:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">#import &quot;AppDelegate.h&quot;</div><div class="line">#import &quot;QMUIConfigurationTemplate.h&quot;</div><div class="line"></div><div class="line">@interface AppDelegate ()</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">@implementation AppDelegate</div><div class="line"></div><div class="line">- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions &#123;</div><div class="line"></div><div class="line">// 启动QMUI的配置模板</div><div class="line">[QMUIConfigurationTemplate setupConfigurationTemplate];</div><div class="line">// 将全局的控件样式渲染出来</div><div class="line">[QMUIConfigurationManager renderGlobalAppearances];</div><div class="line">return YES;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="2-QMUI的使用-二-iOS幽灵按钮ghostButton"><a href="#2-QMUI的使用-二-iOS幽灵按钮ghostButton" class="headerlink" title="2. QMUI的使用(二) - iOS幽灵按钮ghostButton"></a>2. QMUI的使用(二) - iOS幽灵按钮ghostButton</h2><h5 id="iOS开发UI组件腾讯QMUI框架-iOS-介绍"><a href="#iOS开发UI组件腾讯QMUI框架-iOS-介绍" class="headerlink" title="iOS开发UI组件腾讯QMUI框架(iOS)介绍"></a>iOS开发UI组件<a href="http://www.jianshu.com/p/9bcdacb5cbe0" target="_blank" rel="external">腾讯QMUI框架(iOS)介绍</a></h5><h4 id="1-幽灵按钮的使用"><a href="#1-幽灵按钮的使用" class="headerlink" title="1. 幽灵按钮的使用"></a>1. 幽灵按钮的使用</h4><p><img src="http://upload-images.jianshu.io/upload_images/2553151-5738554d064850b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="幽灵按钮效果图.png"></p>
-<p>实现上面效果的代码:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">- (void)initSubviews &#123;</div><div class="line">[super initSubviews];</div><div class="line">self.ghostButton1 = [[QMUIGhostButton alloc]initWithGhostType:QMUIGhostButtonColorBlue];</div><div class="line">self.ghostButton1.titleLabel.font = UIFontMake(14);</div><div class="line">[self.ghostButton1 setTitle:@&quot;QMUIGhostButtonColorBlue&quot; forState:UIControlStateNormal];</div><div class="line">self.ghostButton1.cornerRadius = 20;  // 默认为按钮高度的一半,改变数值以改变圆角大小</div><div class="line">[self.view addSubview:self.ghostButton1];</div><div class="line"></div><div class="line">self.ghostButton2 = [[QMUIGhostButton alloc]init];</div><div class="line">self.ghostButton2.ghostColor = [UIColor grayColor]; // 自定义幽灵按钮的颜色(这里不是QMUI的枚举颜色)</div><div class="line">self.ghostButton2.titleLabel.font = UIFontMake(14);</div><div class="line">[self.ghostButton2 setTitle:@&quot;QMUIGhostButtonColorRed&quot; forState:UIControlStateNormal];</div><div class="line">[self.view addSubview:self.ghostButton2];</div><div class="line"></div><div class="line">self.separatorLayer1 = [QDCommonUI generateSeparatorLayer];</div><div class="line">[self.view.layer addSublayer:self.separatorLayer1];</div><div class="line">self.separatorLayer2 = [QDCommonUI generateSeparatorLayerColorBlue]; // 如果要改变分割线的颜色,在QDCommonUI文件中添加类对应的方法即可.</div><div class="line">[self.view.layer addSublayer:self.separatorLayer2];</div><div class="line">&#125;</div><div class="line">- (void)viewDidLayoutSubviews &#123;</div><div class="line">[super viewDidLayoutSubviews];</div><div class="line">CGFloat contentMinY = CGRectGetMaxY(self.navigationController.navigationBar.frame);</div><div class="line">CGFloat buttonSpacingHeight = 72;</div><div class="line">CGSize buttonSize = CGSizeMake(260, 40);</div><div class="line">CGFloat buttonMinX = CGFloatGetCenter(CGRectGetWidth(self.view.bounds), buttonSize.width);</div><div class="line">CGFloat buttonOffsetY = CGFloatGetCenter(buttonSpacingHeight, buttonSize.height);</div><div class="line"></div><div class="line">self.ghostButton1.frame = CGRectFlatMake(buttonMinX, contentMinY + buttonOffsetY, buttonSize.width, buttonSize.height);</div><div class="line">self.ghostButton2.frame = CGRectFlatMake(buttonMinX, contentMinY + buttonSpacingHeight + buttonOffsetY, buttonSize.width, buttonSize.height);</div><div class="line"></div><div class="line">self.separatorLayer1.frame = CGRectMake(0, contentMinY + buttonSpacingHeight - PixelOne, CGRectGetWidth(self.view.bounds), PixelOne);</div><div class="line">self.separatorLayer2.frame = CGRectMake(0, contentMinY + buttonSpacingHeight * 2 - PixelOne, CGRectGetWidth(self.view.bounds), PixelOne);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>还支持设置带有图片的幽灵按钮,图片可以通过枚举类型设置图片在按钮标题的上左下右,支持设置图片和标题的间隔,具体代码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">self.ghostButton3 = [[QMUIGhostButton alloc] initWithGhostType:QMUIGhostButtonColorGreen];</div><div class="line">self.ghostButton3.titleLabel.font = UIFontMake(14);</div><div class="line">[self.ghostButton3 setTitle:@&quot;点击修改ghostColor&quot; forState:UIControlStateNormal];</div><div class="line">[self.ghostButton3 setImage:UIImageMake(@&quot;icon_emotion&quot;) forState:UIControlStateNormal];</div><div class="line">self.ghostButton3.imageEdgeInsets = UIEdgeInsetsMake(0, 6, 0, 0);    //设置图片和标题的间隔</div><div class="line">self.ghostButton3.imagePosition = QMUIButtonImagePositionRight;      //默认为QMUIButtonImagePositionLeft</div><div class="line">self.ghostButton3.adjustsImageWithGhostColor = YES;</div><div class="line">[self.ghostButton3 addTarget:self action:@selector(handleGhostButtonColorEvent) forControlEvents:UIControlEventTouchUpInside];</div><div class="line">[self.view addSubview:self.ghostButton3];</div></pre></td></tr></table></figure></p>
-<p>效果如下:</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2553151-6e77646880694ce2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="带图片的幽灵按钮.png"></p>
-<h2 id="3-QMUI的使用-三-iOS搜索标签的流水布局"><a href="#3-QMUI的使用-三-iOS搜索标签的流水布局" class="headerlink" title="3.QMUI的使用(三) - iOS搜索标签的流水布局"></a>3.QMUI的使用(三) - iOS搜索标签的流水布局</h2><p>注:项目是基于QMUI框架,因此实现此效果需pod或手动安装QMUIKit框架<br>项目<a href="https://github.com/cellgit/QMUIFloatLayoutView" target="_blank" rel="external">github下载</a></p>
-<h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><ol>
-<li>安装QMUI框架:<a href="http://qmuiteam.com/ios/page/start.html#qw_downloadForUse" target="_blank" rel="external">安装方法</a></li>
-<li>在AppDelegate启动QMUI的配置模板和渲染全局控件样式:<a href="http://www.jianshu.com/p/1a31c80c8b85" target="_blank" rel="external">设置方法</a></li>
-<li>在pod文件中找到QMUIConfigurationTemplate,将.h和.m拖入到目录下,如果出现文件重复,将pod中.h文件代码注释掉即可.(这里也可以下载QMUI官方Demo,将Demo中的组件Common文件直接拖入并复制到自己的项目中,出现重复文件报错处理方法同pod一样处理即可)</li>
-<li>在viewController文件中导入<code>#import &quot;QMUICommonViewController.h&quot;</code></li>
-<li>编写代码如下:</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">#import &quot;ViewController.h&quot;</div><div class="line">#import &quot;QMUICommonViewController.h&quot;</div><div class="line"></div><div class="line">@interface ViewController ()</div><div class="line"></div><div class="line">@property(nonatomic, strong) QMUIFloatLayoutView *floatLayoutView;</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">@implementation ViewController</div><div class="line"></div><div class="line">- (void)viewDidLoad &#123;</div><div class="line">[super viewDidLoad];</div><div class="line"></div><div class="line">self.title = @&quot;QMUIFloatLayoutView&quot;;</div><div class="line"></div><div class="line">self.floatLayoutView = [[QMUIFloatLayoutView alloc] init];</div><div class="line">self.floatLayoutView.padding = UIEdgeInsetsMake(12, 12, 12, 12);</div><div class="line">self.floatLayoutView.itemMargins = UIEdgeInsetsMake(0, 0, 10, 10);</div><div class="line">self.floatLayoutView.minimumItemSize = CGSizeMake(69, 29);// 以2个字的按钮作为最小宽度</div><div class="line">self.floatLayoutView.layer.borderWidth = PixelOne; //边框注释即消失</div><div class="line">self.floatLayoutView.layer.borderColor = UIColorSeparator.CGColor;</div><div class="line">[self.view addSubview:self.floatLayoutView];</div><div class="line"></div><div class="line">NSArray&lt;NSString *&gt; *suggestions = @[@&quot;iOS&quot;, @&quot;刘宏立&quot;, @&quot;安徽工程大学&quot;, @&quot;北京市&quot;, @&quot;苹果开发者&quot;, @&quot;地铁太挤&quot;, @&quot;奥林匹克森林公园&quot;];</div><div class="line">for (NSInteger i = 0; i &lt; suggestions.count; i++) &#123;</div><div class="line">QMUIGhostButton *button = [[QMUIGhostButton alloc] initWithGhostType:QMUIGhostButtonColorGray];</div><div class="line">[button setTitle:suggestions[i] forState:UIControlStateNormal];</div><div class="line">button.titleLabel.font = UIFontMake(14);</div><div class="line">button.contentEdgeInsets = UIEdgeInsetsMake(6, 20, 6, 20);</div><div class="line">[self.floatLayoutView addSubview:button];</div><div class="line">&#125;</div><div class="line"></div><div class="line">UIEdgeInsets padding = UIEdgeInsetsMake(CGRectGetMaxY(self.navigationController.navigationBar.frame) + 36, 24, 36, 24);</div><div class="line">CGFloat contentWidth = CGRectGetWidth(self.view.bounds) - UIEdgeInsetsGetHorizontalValue(padding);</div><div class="line">CGSize floatLayoutViewSize = [self.floatLayoutView sizeThatFits:CGSizeMake(contentWidth, CGFLOAT_MAX)];</div><div class="line">self.floatLayoutView.frame = CGRectMake(padding.left, padding.top, contentWidth, floatLayoutViewSize.height);</div><div class="line"></div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure>
-<p>最终效果图</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2553151-ba27a5ee90344f8a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="搜索标签样式流水布局.png"></p>
-<p>注:项目源于  QMUI 的一个功能,这里将其拆分开来</p>
+    <span class="archive-page-counter">
+      
+      
+      
+        
+      
+      嗯..! 目前共计 5 篇日志。 继续努力。
+    </span>
 
     
-  </div>
+
+      
+      
+      
+
+      
+        
+        <div class="collection-title">
+          <h2 class="archive-year motion-element" id="archive-year-2017">2017</h2>
+        </div>
+      
+      
+
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
+        
+            <a class="post-title-link" href="/2017/03/25/使用手册 - iOS开发常用工具/" itemprop="url">
+              
+                <span itemprop="name">未命名</span>
+              
+            </a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2017-03-25T15:39:20+08:00"
+              content="2017-03-25" >
+          03-25
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+    
+
+      
+      
+      
+
+      
+      
+
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
+        
+            <a class="post-title-link" href="/2017/03/25/对象方法的封装/" itemprop="url">
+              
+                <span itemprop="name">未命名</span>
+              
+            </a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2017-03-25T10:51:52+08:00"
+              content="2017-03-25" >
+          03-25
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+    
+
+  </section>
+
+  
+
 
           
           </div>
@@ -364,14 +414,6 @@
 
 
           
-  <div class="comments" id="comments">
-    
-      <div class="ds-thread" data-thread-key="iOS游戏开发笔记.html"
-           data-title="腾讯QMUI使用方法(iOS)" data-url="http://yoursite.com/iOS游戏开发笔记.html">
-      </div>
-    
-  </div>
-
 
         </div>
         
@@ -535,6 +577,12 @@
   
 
   
+  
+    <script type="text/javascript" id="motion.page.archive">
+      $('.archive-year').velocity('transition.slideLeftIn');
+    </script>
+  
+
 
   
 
