@@ -87,28 +87,28 @@
 
 
 
-<meta name="description" content="iOS开发笔记 - GridView 九宫格#随笔
+<meta name="description" content="title:GridViewLayout 九宫格布局#随笔
 
 纯代码加载自定义视图:
 
-1234567891011// 在控制器创建自定义视图对象后直接加载自定义视图:- (instancetype)initWithFrame:(CGRect)frame &amp;#123;    self = [super initWithFrame:frame];    if (self) &amp;#123;        [s">
+1234567891011// 在控制器创建自定义视图对象后直接加载自定义视图:- (instancetype)initWithFrame:(CGRect)frame &amp;#123;    self = [super initWithFrame:frame];    if (self) &amp;#123;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="刘宏立的博客">
 <meta property="og:url" content="http://yoursite.com/2017/04/03/GridViewLayout/index.html">
 <meta property="og:site_name" content="刘宏立的博客">
-<meta property="og:description" content="iOS开发笔记 - GridView 九宫格#随笔
+<meta property="og:description" content="title:GridViewLayout 九宫格布局#随笔
 
 纯代码加载自定义视图:
 
-1234567891011// 在控制器创建自定义视图对象后直接加载自定义视图:- (instancetype)initWithFrame:(CGRect)frame &amp;#123;    self = [super initWithFrame:frame];    if (self) &amp;#123;        [s">
-<meta property="og:updated_time" content="2017-04-03T11:52:10.000Z">
+1234567891011// 在控制器创建自定义视图对象后直接加载自定义视图:- (instancetype)initWithFrame:(CGRect)frame &amp;#123;    self = [super initWithFrame:frame];    if (self) &amp;#123;">
+<meta property="og:updated_time" content="2017-04-03T11:55:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="刘宏立的博客">
-<meta name="twitter:description" content="iOS开发笔记 - GridView 九宫格#随笔
+<meta name="twitter:description" content="title:GridViewLayout 九宫格布局#随笔
 
 纯代码加载自定义视图:
 
-1234567891011// 在控制器创建自定义视图对象后直接加载自定义视图:- (instancetype)initWithFrame:(CGRect)frame &amp;#123;    self = [super initWithFrame:frame];    if (self) &amp;#123;        [s">
+1234567891011// 在控制器创建自定义视图对象后直接加载自定义视图:- (instancetype)initWithFrame:(CGRect)frame &amp;#123;    self = [super initWithFrame:frame];    if (self) &amp;#123;">
 
 
 
@@ -430,7 +430,7 @@
 
       
         <hr>
-<h2 id="iOS开发笔记-GridView-九宫格"><a href="#iOS开发笔记-GridView-九宫格" class="headerlink" title="iOS开发笔记 - GridView 九宫格"></a>iOS开发笔记 - GridView 九宫格</h2><p>#随笔</p>
+<h2 id="title-GridViewLayout-九宫格布局"><a href="#title-GridViewLayout-九宫格布局" class="headerlink" title="title:GridViewLayout 九宫格布局"></a>title:GridViewLayout 九宫格布局</h2><p>#随笔</p>
 <ol>
 <li>纯代码加载自定义视图:</li>
 </ol>
@@ -441,6 +441,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">号外: 开发中自定义 XIB 时的常用写法: 通过类方法加载</div><div class="line">1. 在自定义 HLXibView.h 文件中 定义类方法</div><div class="line">  + (instancetype) loadXibView;</div><div class="line"></div><div class="line">2. 在 HLXibView.m 中实现类方法:</div><div class="line">  + (instancetype) loadXibView &#123;</div><div class="line">    UINib *nib = [UINib nibWithNibName:@&quot;HLXibView&quot; bundle:nil];</div><div class="line">    return [nib instantiateWithOwner:nil options:nil].lastObject;</div><div class="line">&#125;</div><div class="line"></div><div class="line">3. 在控制器中 导入头文件 #import &quot;HLXibView.h&quot; 并且调用类方法</div><div class="line">  - (void)setupUI &#123;</div><div class="line">    HLXibView *view = [HLXibView loadXibView];</div><div class="line">    [self.view addSubview:view];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>3.九宫格 gridView 布局</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">- (void)setupUI &#123;</div><div class="line">    NSInteger count = 12;</div><div class="line">    NSMutableArray *gridViews = [NSMutableArray array];</div><div class="line">    </div><div class="line">    for (NSInteger i = 0; i &lt; count; i++) &#123;</div><div class="line">        HLXibView *appView = [HLXibView loadXibView];</div><div class="line">        // 1&gt; 添加到视图</div><div class="line">        [self.view addSubview:appView];</div><div class="line">        // 2&gt; 添加到数组</div><div class="line">        [gridViews addObject:appView];</div><div class="line">    &#125;</div><div class="line">    // 每行的视图个数</div><div class="line">    NSInteger rowCount = 3;</div><div class="line">    // 视图的大小</div><div class="line">    CGSize viewSize = self.view.bounds.size;</div><div class="line">    CGSize itemSize = [HLXibView loadXibView].bounds.size;</div><div class="line">    // 计算间距</div><div class="line">    CGFloat margin = (viewSize.width - rowCount * itemSize.width) / (rowCount + 1);</div><div class="line">    </div><div class="line">    // 2&gt; 九宫格布局</div><div class="line">    for (NSInteger i = 0; i &lt; count; i++) &#123;</div><div class="line">        // 计算行和列</div><div class="line">        NSInteger row = i / rowCount;</div><div class="line">        NSInteger col = i % rowCount;</div><div class="line">        NSLog(@&quot;row %zd col %zd&quot;, row, col);</div><div class="line">        // 计算偏移量</div><div class="line">        CGFloat xOffset = col * (itemSize.width + margin) + margin;</div><div class="line">        CGFloat yOffset = row * (itemSize.height + margin) + margin;</div><div class="line">        </div><div class="line">        HLXibView *view = gridViews[i];</div><div class="line">        view.frame = CGRectOffset(view.bounds, xOffset, yOffset);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -593,7 +594,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#iOS开发笔记-GridView-九宫格"><span class="nav-number">1.</span> <span class="nav-text">iOS开发笔记 - GridView 九宫格</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#title-GridViewLayout-九宫格布局"><span class="nav-number">1.</span> <span class="nav-text">title:GridViewLayout 九宫格布局</span></a></li></ol></div>
             
 
           </div>
