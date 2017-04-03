@@ -3,6 +3,13 @@
   
     
     <entry>
+      <title></title>
+      <url>%2F2017%2F04%2F03%2F%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0(%E4%B8%80)%2F</url>
+      <content type="text"><![CDATA[iOS开发笔记 - GridView 九宫格#随笔 纯代码加载自定义视图: 1234567891011// 在控制器创建自定义视图对象后直接加载自定义视图:- (instancetype)initWithFrame:(CGRect)frame &#123; self = [super initWithFrame:frame]; if (self) &#123; [self setupUI]; &#125; return self;&#125;- (void)setupUI &#123; &#125; 2.加载 XIB 的两种方式:注意:加载nib时返回的是数组,因此要在后面加上: .lastObject 12345第一种:- (void)setupUI &#123; UIView *view = [[NSBundle mainBundle] loadNibNamed:@&quot;xib视图类名&quot; owner:nil options:nil].lastObject; [self.view addSubview:view];&#125; 1234第二种:内存优化后的加载方式UINib *nib = [UINib nibWithNibName:@&quot;xib视图类名&quot; bundle:nil]; UIView *view = [nib instantiateWithOwner:nil options:nil].lastObject; [self.view addSubview:view]; 123456789101112131415号外: 开发中自定义 XIB 时的常用写法: 通过类方法加载1. 在自定义 HLXibView.h 文件中 定义类方法 + (instancetype) loadXibView;2. 在 HLXibView.m 中实现类方法: + (instancetype) loadXibView &#123; UINib *nib = [UINib nibWithNibName:@&quot;HLXibView&quot; bundle:nil]; return [nib instantiateWithOwner:nil options:nil].lastObject;&#125;3. 在控制器中 导入头文件 #import &quot;HLXibView.h&quot; 并且调用类方法 - (void)setupUI &#123; HLXibView *view = [HLXibView loadXibView]; [self.view addSubview:view];&#125; 3.九宫格 gridView 布局 123456789101112131415161718192021222324252627282930313233- (void)setupUI &#123; NSInteger count = 12; NSMutableArray *gridViews = [NSMutableArray array]; for (NSInteger i = 0; i &lt; count; i++) &#123; HLXibView *appView = [HLXibView loadXibView]; // 1&gt; 添加到视图 [self.view addSubview:appView]; // 2&gt; 添加到数组 [gridViews addObject:appView]; &#125; // 每行的视图个数 NSInteger rowCount = 3; // 视图的大小 CGSize viewSize = self.view.bounds.size; CGSize itemSize = [HLXibView loadXibView].bounds.size; // 计算间距 CGFloat margin = (viewSize.width - rowCount * itemSize.width) / (rowCount + 1); // 2&gt; 九宫格布局 for (NSInteger i = 0; i &lt; count; i++) &#123; // 计算行和列 NSInteger row = i / rowCount; NSInteger col = i % rowCount; NSLog(@&quot;row %zd col %zd&quot;, row, col); // 计算偏移量 CGFloat xOffset = col * (itemSize.width + margin) + margin; CGFloat yOffset = row * (itemSize.height + margin) + margin; HLXibView *view = gridViews[i]; view.frame = CGRectOffset(view.bounds, xOffset, yOffset); &#125;&#125;]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[使用手册 - iOS开发常用工具]]></title>
       <url>%2F2017%2F03%2F25%2F%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C%20-%20iOS%E5%BC%80%E5%8F%91%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%2F</url>
       <content type="text"><![CDATA[iOS开发常用工具使用手册一、索引### Sketch 中文]]></content>
