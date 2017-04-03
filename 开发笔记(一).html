@@ -87,15 +87,28 @@
 
 
 
-<meta name="description" content="如果不曾相见,人们就不会相恋">
+<meta name="description" content="iOS开发笔记 - GridView 九宫格#随笔
+
+纯代码加载自定义视图:
+
+1234567891011// 在控制器创建自定义视图对象后直接加载自定义视图:- (instancetype)initWithFrame:(CGRect)frame &amp;#123;    self = [super initWithFrame:frame];    if (self) &amp;#123;        [s">
 <meta property="og:type" content="website">
 <meta property="og:title" content="刘宏立的博客">
-<meta property="og:url" content="http://yoursite.com/archives/2017/04/index.html">
+<meta property="og:url" content="http://yoursite.com/开发笔记(一).html">
 <meta property="og:site_name" content="刘宏立的博客">
-<meta property="og:description" content="如果不曾相见,人们就不会相恋">
+<meta property="og:description" content="iOS开发笔记 - GridView 九宫格#随笔
+
+纯代码加载自定义视图:
+
+1234567891011// 在控制器创建自定义视图对象后直接加载自定义视图:- (instancetype)initWithFrame:(CGRect)frame &amp;#123;    self = [super initWithFrame:frame];    if (self) &amp;#123;        [s">
+<meta property="og:updated_time" content="2017-04-03T11:38:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="刘宏立的博客">
-<meta name="twitter:description" content="如果不曾相见,人们就不会相恋">
+<meta name="twitter:description" content="iOS开发笔记 - GridView 九宫格#随笔
+
+纯代码加载自定义视图:
+
+1234567891011// 在控制器创建自定义视图对象后直接加载自定义视图:- (instancetype)initWithFrame:(CGRect)frame &amp;#123;    self = [super initWithFrame:frame];    if (self) &amp;#123;        [s">
 
 
 
@@ -123,13 +136,19 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2017/04/"/>
+  <link rel="canonical" href="http://yoursite.com/开发笔记(一).html"/>
 
 
 
 
 
-  <title> 归档 | 刘宏立的博客 </title>
+  <title>
+  
+
+  
+     | 刘宏立的博客
+  
+</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -164,7 +183,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  page-archive  ">
+  <div class="container one-collumn sidebar-position-left  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -310,66 +329,32 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+  <header class="post-header">
 
-    <span class="archive-page-counter">
-      
-      
-      
-        
-      
-      嗯..! 目前共计 6 篇日志。 继续努力。
-    </span>
+	<h2 class="post-title" itemprop="name headline"></h2>
+
+
+
+</header>
 
     
-
-      
-      
-      
-
-      
-        
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2017">2017</h2>
-        </div>
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/04/03/开发笔记(一)/" itemprop="url">
-              
-                <span itemprop="name">未命名</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-04-03T17:36:05+08:00"
-              content="2017-04-03" >
-          04-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+    
+      <hr>
+<h2 id="iOS开发笔记-GridView-九宫格"><a href="#iOS开发笔记-GridView-九宫格" class="headerlink" title="iOS开发笔记 - GridView 九宫格"></a>iOS开发笔记 - GridView 九宫格</h2><p>#随笔</p>
+<ol>
+<li>纯代码加载自定义视图:</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// 在控制器创建自定义视图对象后直接加载自定义视图:</div><div class="line">- (instancetype)initWithFrame:(CGRect)frame &#123;</div><div class="line">    self = [super initWithFrame:frame];</div><div class="line">    if (self) &#123;</div><div class="line">        [self setupUI];</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div><div class="line">- (void)setupUI &#123;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>2.加载 XIB 的两种方式:<br>注意:加载nib时返回的是数组,因此要在后面加上: .lastObject</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">第一种:</div><div class="line">- (void)setupUI &#123;</div><div class="line">    UIView *view = [[NSBundle mainBundle] loadNibNamed:@&quot;xib视图类名&quot; owner:nil options:nil].lastObject;</div><div class="line">    [self.view addSubview:view];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">第二种:内存优化后的加载方式</div><div class="line">UINib *nib = [UINib nibWithNibName:@&quot;xib视图类名&quot; bundle:nil];</div><div class="line">    UIView *view = [nib instantiateWithOwner:nil options:nil].lastObject;</div><div class="line">    [self.view addSubview:view];</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">号外: 开发中自定义 XIB 时的常用写法: 通过类方法加载</div><div class="line">1. 在自定义 HLXibView.h 文件中 定义类方法</div><div class="line">  + (instancetype) loadXibView;</div><div class="line"></div><div class="line">2. 在 HLXibView.m 中实现类方法:</div><div class="line">  + (instancetype) loadXibView &#123;</div><div class="line">    UINib *nib = [UINib nibWithNibName:@&quot;HLXibView&quot; bundle:nil];</div><div class="line">    return [nib instantiateWithOwner:nil options:nil].lastObject;</div><div class="line">&#125;</div><div class="line"></div><div class="line">3. 在控制器中 导入头文件 #import &quot;HLXibView.h&quot; 并且调用类方法</div><div class="line">  - (void)setupUI &#123;</div><div class="line">    HLXibView *view = [HLXibView loadXibView];</div><div class="line">    [self.view addSubview:view];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>3.九宫格 gridView 布局</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">- (void)setupUI &#123;</div><div class="line">    NSInteger count = 12;</div><div class="line">    NSMutableArray *gridViews = [NSMutableArray array];</div><div class="line">    </div><div class="line">    for (NSInteger i = 0; i &lt; count; i++) &#123;</div><div class="line">        HLXibView *appView = [HLXibView loadXibView];</div><div class="line">        // 1&gt; 添加到视图</div><div class="line">        [self.view addSubview:appView];</div><div class="line">        // 2&gt; 添加到数组</div><div class="line">        [gridViews addObject:appView];</div><div class="line">    &#125;</div><div class="line">    // 每行的视图个数</div><div class="line">    NSInteger rowCount = 3;</div><div class="line">    // 视图的大小</div><div class="line">    CGSize viewSize = self.view.bounds.size;</div><div class="line">    CGSize itemSize = [HLXibView loadXibView].bounds.size;</div><div class="line">    // 计算间距</div><div class="line">    CGFloat margin = (viewSize.width - rowCount * itemSize.width) / (rowCount + 1);</div><div class="line">    </div><div class="line">    // 2&gt; 九宫格布局</div><div class="line">    for (NSInteger i = 0; i &lt; count; i++) &#123;</div><div class="line">        // 计算行和列</div><div class="line">        NSInteger row = i / rowCount;</div><div class="line">        NSInteger col = i % rowCount;</div><div class="line">        NSLog(@&quot;row %zd col %zd&quot;, row, col);</div><div class="line">        // 计算偏移量</div><div class="line">        CGFloat xOffset = col * (itemSize.width + margin) + margin;</div><div class="line">        CGFloat yOffset = row * (itemSize.height + margin) + margin;</div><div class="line">        </div><div class="line">        HLXibView *view = gridViews[i];</div><div class="line">        view.frame = CGRectOffset(view.bounds, xOffset, yOffset);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
     
-
-  </section>
-
-  
-
+  </div>
 
           
           </div>
@@ -377,6 +362,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="开发笔记(一).html"
+           data-title="" data-url="http://yoursite.com/开发笔记(一).html">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -412,7 +405,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -540,12 +533,6 @@
   
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
-
 
   
 
