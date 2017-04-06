@@ -87,22 +87,19 @@
 
 
 
-<meta name="description" content="iOS开发常用工具使用手册一、索引### 
-
-Sketch 中文">
+<meta name="description" content="#UIScrollViewUIScrollView注意点:
+1.在滚动的时候,UIScrollView的frame没有变,改变的只有UIScrollView的bounds的x和y的值.2.要想UIScrollView能够滚动,必须要设置scrollView.contentSize = CGSizeMake(x, y),否则UIScrollView起不了作用, x决定横向滚动,y决定纵向滚动,当(x">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用手册 - iOS开发常用工具">
-<meta property="og:url" content="http://yoursite.com/2017/03/25/使用手册 - iOS开发常用工具/index.html">
+<meta property="og:title" content="UIScrollView">
+<meta property="og:url" content="http://yoursite.com/2017/04/04/UIScrollView/index.html">
 <meta property="og:site_name" content="刘宏立的博客">
-<meta property="og:description" content="iOS开发常用工具使用手册一、索引### 
-
-Sketch 中文">
-<meta property="og:updated_time" content="2017-03-25T09:49:12.000Z">
+<meta property="og:description" content="#UIScrollViewUIScrollView注意点:
+1.在滚动的时候,UIScrollView的frame没有变,改变的只有UIScrollView的bounds的x和y的值.2.要想UIScrollView能够滚动,必须要设置scrollView.contentSize = CGSizeMake(x, y),否则UIScrollView起不了作用, x决定横向滚动,y决定纵向滚动,当(x">
+<meta property="og:updated_time" content="2017-04-04T12:38:13.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用手册 - iOS开发常用工具">
-<meta name="twitter:description" content="iOS开发常用工具使用手册一、索引### 
-
-Sketch 中文">
+<meta name="twitter:title" content="UIScrollView">
+<meta name="twitter:description" content="#UIScrollViewUIScrollView注意点:
+1.在滚动的时候,UIScrollView的frame没有变,改变的只有UIScrollView的bounds的x和y的值.2.要想UIScrollView能够滚动,必须要设置scrollView.contentSize = CGSizeMake(x, y),否则UIScrollView起不了作用, x决定横向滚动,y决定纵向滚动,当(x">
 
 
 
@@ -130,13 +127,13 @@ Sketch 中文">
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/03/25/使用手册 - iOS开发常用工具/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/04/04/UIScrollView/"/>
 
 
 
 
 
-  <title> 使用手册 - iOS开发常用工具 | 刘宏立的博客 </title>
+  <title> UIScrollView | 刘宏立的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -327,7 +324,7 @@ Sketch 中文">
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/25/使用手册 - iOS开发常用工具/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/04/UIScrollView/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="刘宏立">
@@ -351,7 +348,7 @@ Sketch 中文">
             
             
               
-                使用手册 - iOS开发常用工具
+                UIScrollView
               
             
           </h1>
@@ -366,8 +363,8 @@ Sketch 中文">
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-25T15:39:20+08:00">
-                2017-03-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-04T20:38:13+08:00">
+                2017-04-04
               </time>
             
 
@@ -385,8 +382,8 @@ Sketch 中文">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/03/25/使用手册 - iOS开发常用工具/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/25/使用手册 - iOS开发常用工具/" itemprop="commentCount"></span>
+                <a href="/2017/04/04/UIScrollView/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/04/UIScrollView/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -394,7 +391,7 @@ Sketch 中文">
 
           
           
-             <span id="/2017/03/25/使用手册 - iOS开发常用工具/" class="leancloud_visitors" data-flag-title="使用手册 - iOS开发常用工具">
+             <span id="/2017/04/04/UIScrollView/" class="leancloud_visitors" data-flag-title="UIScrollView">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -423,10 +420,8 @@ Sketch 中文">
       
 
       
-        <h1 id="iOS开发常用工具使用手册"><a href="#iOS开发常用工具使用手册" class="headerlink" title="iOS开发常用工具使用手册"></a>iOS开发常用工具使用手册</h1><h2 id="一、索引"><a href="#一、索引" class="headerlink" title="一、索引"></a>一、索引</h2><p>### </p>
-<ol>
-<li><a href="http://sketch.im" target="_blank" rel="external">Sketch 中文</a></li>
-</ol>
+        <p>#UIScrollView<br>UIScrollView注意点:</p>
+<p>1.在滚动的时候,UIScrollView的frame没有变,改变的只有UIScrollView的bounds的<code>x</code>和<code>y</code>的值.<br>2.要想UIScrollView能够滚动,必须要设置<code>scrollView.contentSize = CGSizeMake(x, y)</code>,否则UIScrollView起不了作用, <code>x</code>决定横向滚动,<code>y</code>决定纵向滚动,当<code>(x, y)</code>为0时,UIScrollView不会滚动</p>
 
       
     </div>
@@ -457,8 +452,8 @@ Sketch 中文">
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/25/对象方法的封装/" rel="next" title="封装对象方法">
-                <i class="fa fa-chevron-left"></i> 封装对象方法
+              <a href="/2017/04/04/iOS动画/" rel="next" title="iOS动画">
+                <i class="fa fa-chevron-left"></i> iOS动画
               </a>
             
           </div>
@@ -467,8 +462,8 @@ Sketch 中文">
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/03/GridViewLayout/" rel="prev" title="GridViewLayout 九宫格布局">
-                GridViewLayout 九宫格布局 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/04/06/KVC字典转模型/" rel="prev" title="iOS字典转模型,模型转字典 和 泛型">
+                iOS字典转模型,模型转字典 和 泛型 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -495,8 +490,8 @@ Sketch 中文">
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/03/25/使用手册 - iOS开发常用工具/"
-           data-title="使用手册 - iOS开发常用工具" data-url="http://yoursite.com/2017/03/25/使用手册 - iOS开发常用工具/">
+      <div class="ds-thread" data-thread-key="2017/04/04/UIScrollView/"
+           data-title="UIScrollView" data-url="http://yoursite.com/2017/04/04/UIScrollView/">
       </div>
     
   </div>
@@ -520,17 +515,8 @@ Sketch 中文">
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.png"
@@ -574,22 +560,6 @@ Sketch 中文">
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#iOS开发常用工具使用手册"><span class="nav-number">1.</span> <span class="nav-text">iOS开发常用工具使用手册</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、索引"><span class="nav-number">1.1.</span> <span class="nav-text">一、索引</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
     </div>
