@@ -89,12 +89,12 @@
 
 <meta name="description" content="如果不曾相见,人们就不会相恋">
 <meta property="og:type" content="website">
-<meta property="og:title" content="刘宏立">
+<meta property="og:title" content="刘宏立博客">
 <meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="刘宏立">
+<meta property="og:site_name" content="刘宏立博客">
 <meta property="og:description" content="如果不曾相见,人们就不会相恋">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="刘宏立">
+<meta name="twitter:title" content="刘宏立博客">
 <meta name="twitter:description" content="如果不曾相见,人们就不会相恋">
 
 
@@ -129,7 +129,7 @@
 
 
 
-  <title> 刘宏立 </title>
+  <title> 刘宏立博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -177,7 +177,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">刘宏立</span>
+        <span class="site-title">刘宏立博客</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -301,9 +301,9 @@
   </span>
 
   <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="刘宏立">
+    <meta itemprop="name" content="刘宏立博客">
     <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="刘宏立" src="">
+      <img style="display:none;" itemprop="url image" alt="刘宏立博客" src="">
     </span>
   </span>
 
@@ -382,19 +382,23 @@
       
         
           
-            <h1 id="概览"><a href="#概览" class="headerlink" title="概览:"></a>概览:</h1><ol>
-<li>字典的映射</li>
-<li>数据管理工具</li>
-<li>yymodel的使用及yymodel中关于description关键字的处理</li>
-<li>网络请求数据的处理</li>
-<li>字符串和整型的相互转化</li>
-<li>关于LBS上annotationView添加的逻辑处理</li>
-<li>自定义modal转场的实现</li>
-<li>高德地图添加annotationView时的布局约束bug：需要为annotationView指定在屏幕上的坐标点</li>
-<li>数据在同一个控制器传递时能用局部变量就不要用全局变量，全局变量容易引起bug</li>
-</ol>
-
-          
+          概览:
+字典的映射
+数据管理工具
+yymodel的使用及yymodel中关于description关键字的处理
+网络请求数据的处理
+字符串和整型的相互转化
+关于LBS上annotationView添加的逻辑处理
+自定义modal转场的实现
+高德地图添加annotationView时的布局约束bug：
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/07/LBS001/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -442,9 +446,9 @@
   </span>
 
   <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="刘宏立">
+    <meta itemprop="name" content="刘宏立博客">
     <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="刘宏立" src="">
+      <img style="display:none;" itemprop="url image" alt="刘宏立博客" src="">
     </span>
   </span>
 
@@ -523,21 +527,15 @@
       
         
           
-            <h1 id="KVC字典转模型-四种方法"><a href="#KVC字典转模型-四种方法" class="headerlink" title="KVC字典转模型: 四种方法"></a>KVC字典转模型: 四种方法</h1><h2 id="建议的方法"><a href="#建议的方法" class="headerlink" title="建议的方法"></a>建议的方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">方法四: 建议通过这种方法字典转模型</div><div class="line">+ (instancetype)personWithDict:(NSDictionary *)dict &#123;</div><div class="line">    return [[self alloc] initWithDict:dict];</div><div class="line">&#125;</div><div class="line">- (instancetype)initWithDict:(NSDictionary *)dict &#123;</div><div class="line">    self = [super init];</div><div class="line">    if (self) &#123;</div><div class="line">        // 方法4 KVC 字典转模型大招 -&gt; 内部实际上就是方法3的实现</div><div class="line">        [self setValuesForKeysWithDictionary:dict];</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><p>1.准备字典数据;</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">在控制器中写入:</div><div class="line">NSDictionary *dict = @&#123;@&quot;name&quot;: @&quot;lao wang&quot;, @&quot;age&quot;: @180&#125;;</div></pre></td></tr></table></figure>
-<p>2.新建 Person 模型文件;</p>
-<p>3.定义属性和模型构造函数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line"></div><div class="line">@interface Person : NSObject</div><div class="line"></div><div class="line">@property (nonatomic, copy) NSString *name;</div><div class="line">@property (nonatomic, assign) NSInteger age;</div><div class="line">@property (nonatomic, copy) NSString *title;</div><div class="line"></div><div class="line">#pragma mark - 模型构造函数</div><div class="line">+ (instancetype)personWithDict:(NSDictionary *)dict;</div><div class="line">- (instancetype)initWithDict:(NSDictionary *)dict;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
-<p>4.字典转模型(四种方法)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">方法一:</div><div class="line">+ (instancetype)personWithDict:(NSDictionary *)dict &#123;</div><div class="line">    return [[self alloc] initWithDict:dict];</div><div class="line">&#125;</div><div class="line">- (instancetype)initWithDict:(NSDictionary *)dict &#123;</div><div class="line">    self = [super init];</div><div class="line">    if (self) &#123;</div><div class="line">        // 方法1 传统写法</div><div class="line">        _name = dict[@&quot;name&quot;];</div><div class="line">        // 字典不能保存基本数据类型，NSNumber -&gt;</div><div class="line">        _age = [dict[@&quot;age&quot;] integerValue];</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">方法二:</div><div class="line">+ (instancetype)personWithDict:(NSDictionary *)dict &#123;</div><div class="line">    return [[self alloc] initWithDict:dict];</div><div class="line">&#125;</div><div class="line">- (instancetype)initWithDict:(NSDictionary *)dict &#123;</div><div class="line">    self = [super init];</div><div class="line">    if (self) &#123;</div><div class="line">        // 方法2 KVC - `间接`通过 key 设置数值</div><div class="line">        // 注意：基本数据类型，不需要转换，KVC 可以自动实现转换！</div><div class="line">        [self setValue:dict[@&quot;name&quot;] forKey:@&quot;name&quot;];</div><div class="line">        [self setValue:dict[@&quot;age&quot;] forKey:@&quot;age&quot;];</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">方法三:</div><div class="line">+ (instancetype)personWithDict:(NSDictionary *)dict &#123;</div><div class="line">    return [[self alloc] initWithDict:dict];</div><div class="line">&#125;</div><div class="line">- (instancetype)initWithDict:(NSDictionary *)dict &#123;</div><div class="line">    self = [super init];</div><div class="line">    if (self) &#123;</div><div class="line">        // 方法3 KVC 循环遍历字典</div><div class="line">        for (NSString *key in dict) &#123;</div><div class="line">            // 1. 通过 key 取值</div><div class="line">            id value = dict[key];</div><div class="line">            // 2. 通过 KVC 方法设置数值</div><div class="line">            // - key 对应对象的 `属性`，如果属性不存在就崩溃</div><div class="line">            [self setValue:value forKey:key];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">方法四: 建议通过这种方法字典转模型</div><div class="line">+ (instancetype)personWithDict:(NSDictionary *)dict &#123;</div><div class="line">    return [[self alloc] initWithDict:dict];</div><div class="line">&#125;</div><div class="line">- (instancetype)initWithDict:(NSDictionary *)dict &#123;</div><div class="line">    self = [super init];</div><div class="line">    if (self) &#123;</div><div class="line">        // 方法4 KVC 字典转模型大招 -&gt; 内部实际上就是方法3的实现</div><div class="line">        [self setValuesForKeysWithDictionary:dict];</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="KVC-的模型转字典"><a href="#KVC-的模型转字典" class="headerlink" title="KVC 的模型转字典"></a>KVC 的模型转字典</h1><p>1.为了便与调试会重写 description 方法, 其中会用到<code>模型转字典</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> KVC `keyed value coding` 键值编码</div><div class="line"> </div><div class="line"> - 如果属性不在字典的 keys 中，运行属性不会被设置值</div><div class="line"> - 如果字典中，存在没有属性的 key，运行默认会崩溃！</div><div class="line"> */</div><div class="line"></div><div class="line">// 默认情况下，如果数出自定义对象，只会输出 class / 指针，不便于调试</div><div class="line">// 日常开发中，如果涉及到**模型**，建议`重写` description，改写输出信息！有利于模型数据的调试</div><div class="line">- (NSString *)description &#123;</div><div class="line">    // 如果提供了错误的 key，同样会崩溃</div><div class="line">    NSArray *keys = @[@&quot;name&quot;, @&quot;age&quot;, @&quot;title&quot;]; // @&quot;xxx&quot;</div><div class="line">    </div><div class="line">    // KVC 的模型转字典，能够将给定键值数组，转换成对应的`字典`，便于输出！</div><div class="line">    return [self dictionaryWithValuesForKeys:keys].description;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="关于泛型"><a href="#关于泛型" class="headerlink" title="关于泛型:"></a>关于泛型:</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">- (void)viewDidLoad &#123;</div><div class="line">    [super viewDidLoad];</div><div class="line">    </div><div class="line">    // - OC 中数组，可以存放任意类型的对象</div><div class="line">    // - 数组是通过下标访问内部元素！</div><div class="line">    // - 数组中绝大多数，放的是相通类型的元素！</div><div class="line">    // &lt;Person *&gt; 表示数组中只存放 Person 对象</div><div class="line">    // - 定义了泛型数组之后，如果添加的对象，和指定类型不匹配，会立即警告，可以提前发现错误！</div><div class="line">    // - 定义了泛型数组之后，就可以通过 `.` 语法直接取数组内部的属性</div><div class="line">    // 关于 `泛型` 主要在 Swift 中使用，OC 中涉及的主要就在 `数组` 的定义</div><div class="line">    NSMutableArray &lt;Person *&gt;*arrayM = [NSMutableArray array];</div><div class="line">    </div><div class="line">    // 如果 key 没有与之对应的属性，会崩溃！</div><div class="line">    // --- 添加第 0 个对象</div><div class="line">    NSDictionary *dict1 = @&#123;@&quot;name&quot;: @&quot;liisXXX&quot;, @&quot;age&quot;: @10&#125;;</div><div class="line">    Person *p1 = [Person personWithDict:dict1];</div><div class="line">    </div><div class="line">    // 添加到数组</div><div class="line">    [arrayM addObject:p1];</div><div class="line">    </div><div class="line">    // --- 添加第 1 个对象</div><div class="line">    NSDictionary *dict2 = @&#123;@&quot;name&quot;: @&quot;lao wang&quot;, @&quot;age&quot;: @180&#125;;</div><div class="line">    Person *p2 = [Person personWithDict:dict2];</div><div class="line">    </div><div class="line">    // 添加到数组</div><div class="line">    [arrayM addObject:p2];</div><div class="line">    </div><div class="line">    // OC 中自定义对象默认只能数出 class / 指针</div><div class="line">    NSLog(@&quot;%@&quot;, arrayM);</div><div class="line">    </div><div class="line">    // --- 添加一个其它类型到数组</div><div class="line">    UIButton *btn = [UIButton buttonWithType:UIButtonTypeContactAdd];</div><div class="line">    // 定义了泛型数组之后，如果添加的对象，和指定类型不匹配，会立即警告，可以提前发现错误！</div><div class="line">    [arrayM addObject:btn];</div><div class="line">    </div><div class="line">    // 通过下标访问元素</div><div class="line">    // - Xcode 7.0 之前，要取属性，需要发送消息的方式，以为可以给 id 类型发送任意消息</div><div class="line">    NSString *name = [arrayM[0] name];</div><div class="line">    // 定义了泛型数组之后，就可以通过 `.` 语法直接取数组内部的属性</div><div class="line">    NSInteger age = arrayM[0].age;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-          
+          KVC字典转模型: 四种方法建议的方法123456789101112方法四: 建议通过这种方法字典转模型+ (instancetype)personWithDict:(NSDictionary *)dict &#123;    return [[self alloc] initWithDict:di
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/04/06/KVC字典转模型/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -585,9 +583,9 @@
   </span>
 
   <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="刘宏立">
+    <meta itemprop="name" content="刘宏立博客">
     <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="刘宏立" src="">
+      <img style="display:none;" itemprop="url image" alt="刘宏立博客" src="">
     </span>
   </span>
 
@@ -666,10 +664,16 @@
       
         
           
-            <p>#UIScrollView<br>UIScrollView注意点:</p>
-<p>1.在滚动的时候,UIScrollView的frame没有变,改变的只有UIScrollView的bounds的<code>x</code>和<code>y</code>的值.<br>2.要想UIScrollView能够滚动,必须要设置<code>scrollView.contentSize = CGSizeMake(x, y)</code>,否则UIScrollView起不了作用, <code>x</code>决定横向滚动,<code>y</code>决定纵向滚动,当<code>(x, y)</code>为0时,UIScrollView不会滚动</p>
-
-          
+          #UIScrollViewUIScrollView注意点:
+1.在滚动的时候,UIScrollView的frame没有变,改变的只有UIScrollView的bounds的x和y的值.2.要想UIScrollView能够滚动,必须要设置scrollView.contentSize = CGSizeM
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/04/04/UIScrollView/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -717,9 +721,9 @@
   </span>
 
   <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="刘宏立">
+    <meta itemprop="name" content="刘宏立博客">
     <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="刘宏立" src="">
+      <img style="display:none;" itemprop="url image" alt="刘宏立博客" src="">
     </span>
   </span>
 
@@ -798,9 +802,15 @@
       
         
           
-            <p>#动画<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">1.创建视图</div><div class="line">2.自动布局</div><div class="line">3.添加监听</div><div class="line">4.开始动画&lt;更新约束,然后创建动画&gt;,[self.view layoutIfNeeded];很重要</div><div class="line">- (void)startAnimation &#123;</div><div class="line">    // 1.更新约束</div><div class="line">    // 1&gt; 建立约束，mas_make</div><div class="line">    // 2&gt; 更新约束 mas_update</div><div class="line">    // 3&gt; 重建 mas_remake - 删除已经建立的，重新设置约束</div><div class="line">    // update 约束只能修改已经建立的约束，如果不存在会在控制台报错</div><div class="line">    [_blueView mas_remakeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">       </div><div class="line">        make.left.top.equalTo(self.view);</div><div class="line">        // 如果不指定 size ，会消失</div><div class="line">        make.size.mas_equalTo(CGSizeMake(50, 50));</div><div class="line">    &#125;];</div><div class="line">    </div><div class="line">    // 2.开始动画</div><div class="line">    [UIView animateWithDuration:2.0 animations:^&#123;</div><div class="line">        [self.view layoutIfNeeded];</div><div class="line">    &#125;];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-
-          
+          #动画123456789101112131415161718192021221.创建视图2.自动布局3.添加监听4.开始动画&lt;更新约束,然后创建动画&gt;,[self.view layoutIfNeeded];很重要- (void)startAnimation &#123;    // 1.
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/04/04/iOS动画/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -848,9 +858,9 @@
   </span>
 
   <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="刘宏立">
+    <meta itemprop="name" content="刘宏立博客">
     <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="刘宏立" src="">
+      <img style="display:none;" itemprop="url image" alt="刘宏立博客" src="">
     </span>
   </span>
 
@@ -929,14 +939,19 @@
       
         
           
-            <p>1.运行时</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">运行时函数 objc_msgSend: 给谁发送消息，对象 (指针本质上就是内存地址)</div></pre></td></tr></table></figure>
-<p>2.在控制台(console)输入 <code>di</code> 可以进行 OC 的反编译</p>
-<p>3.对象存储</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">对象方法中:通过对象的地址告诉对象去指向xxx的方法</div><div class="line">1.对象创建完成后会在内存开辟一个地址专门存储这个对象,</div><div class="line">2.给这个对象赋值的时候实际上是通过地址来告诉对象去执行 set 方法</div><div class="line">3.要发送消息是必须要拿到当前对象的指针地址</div><div class="line">4.在程序中经常会出现 self,self表明是当前对象,对象已经创建,self就是为了拿到当前对象地止,以便发送消息,self.view,实际上是[self view];,调用的是 get 方法</div><div class="line">5.在 init 方法中不要写 self. ,要用成员变量下划线,</div><div class="line">6.在 init 方法中,如果要访问父类的属性,同样要用 self. ,表示当前对象是子类</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">类方法中</div><div class="line">1.self 表示本类</div><div class="line">2.在 OC 中,类本质上也是一个对象</div></pre></td></tr></table></figure>
-
-          
+          1.运行时
+1运行时函数 objc_msgSend: 给谁发送消息，对象 (指针本质上就是内存地址)
+2.在控制台(console)输入 di 可以进行 OC 的反编译
+3.对象存储
+1234567对象方法中:通过对象的地址告诉对象去指向xxx的方法1.对象创建完成后会在内存开辟一个地址专门存储这个
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/04/04/Objective-C语法笔记/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -984,9 +999,9 @@
   </span>
 
   <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="刘宏立">
+    <meta itemprop="name" content="刘宏立博客">
     <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="刘宏立" src="">
+      <img style="display:none;" itemprop="url image" alt="刘宏立博客" src="">
     </span>
   </span>
 
@@ -1065,19 +1080,19 @@
       
         
           
-            <p>#随笔</p>
-<ol>
-<li>纯代码加载自定义视图:</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// 在控制器创建自定义视图对象后直接加载自定义视图:</div><div class="line">- (instancetype)initWithFrame:(CGRect)frame &#123;</div><div class="line">    self = [super initWithFrame:frame];</div><div class="line">    if (self) &#123;</div><div class="line">        [self setupUI];</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div><div class="line">- (void)setupUI &#123;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>2.加载 XIB 的两种方式:<br>注意:加载nib时返回的是数组,因此要在后面加上: .lastObject</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">第一种:</div><div class="line">- (void)setupUI &#123;</div><div class="line">    UIView *view = [[NSBundle mainBundle] loadNibNamed:@&quot;xib视图类名&quot; owner:nil options:nil].lastObject;</div><div class="line">    [self.view addSubview:view];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">第二种:内存优化后的加载方式</div><div class="line">UINib *nib = [UINib nibWithNibName:@&quot;xib视图类名&quot; bundle:nil];</div><div class="line">    UIView *view = [nib instantiateWithOwner:nil options:nil].lastObject;</div><div class="line">    [self.view addSubview:view];</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">号外: 开发中自定义 XIB 时的常用写法: 通过类方法加载</div><div class="line">1. 在自定义 HLXibView.h 文件中 定义类方法</div><div class="line">  + (instancetype) loadXibView;</div><div class="line"></div><div class="line">2. 在 HLXibView.m 中实现类方法:</div><div class="line">  + (instancetype) loadXibView &#123;</div><div class="line">    UINib *nib = [UINib nibWithNibName:@&quot;HLXibView&quot; bundle:nil];</div><div class="line">    return [nib instantiateWithOwner:nil options:nil].lastObject;</div><div class="line">&#125;</div><div class="line"></div><div class="line">3. 在控制器中 导入头文件 #import &quot;HLXibView.h&quot; 并且调用类方法</div><div class="line">  - (void)setupUI &#123;</div><div class="line">    HLXibView *view = [HLXibView loadXibView];</div><div class="line">    [self.view addSubview:view];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>3.九宫格 gridView 布局</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">- (void)setupUI &#123;</div><div class="line">    NSInteger count = 12;</div><div class="line">    NSMutableArray *gridViews = [NSMutableArray array];</div><div class="line">    </div><div class="line">    for (NSInteger i = 0; i &lt; count; i++) &#123;</div><div class="line">        HLXibView *appView = [HLXibView loadXibView];</div><div class="line">        // 1&gt; 添加到视图</div><div class="line">        [self.view addSubview:appView];</div><div class="line">        // 2&gt; 添加到数组</div><div class="line">        [gridViews addObject:appView];</div><div class="line">    &#125;</div><div class="line">    // 每行的视图个数</div><div class="line">    NSInteger rowCount = 3;</div><div class="line">    // 视图的大小</div><div class="line">    CGSize viewSize = self.view.bounds.size;</div><div class="line">    CGSize itemSize = [HLXibView loadXibView].bounds.size;</div><div class="line">    // 计算间距</div><div class="line">    CGFloat margin = (viewSize.width - rowCount * itemSize.width) / (rowCount + 1);</div><div class="line">    </div><div class="line">    // 2&gt; 九宫格布局</div><div class="line">    for (NSInteger i = 0; i &lt; count; i++) &#123;</div><div class="line">        // 计算行和列</div><div class="line">        NSInteger row = i / rowCount;</div><div class="line">        NSInteger col = i % rowCount;</div><div class="line">        NSLog(@&quot;row %zd col %zd&quot;, row, col);</div><div class="line">        // 计算偏移量</div><div class="line">        CGFloat xOffset = col * (itemSize.width + margin) + margin;</div><div class="line">        CGFloat yOffset = row * (itemSize.height + margin) + margin;</div><div class="line">        </div><div class="line">        HLXibView *view = gridViews[i];</div><div class="line">        view.frame = CGRectOffset(view.bounds, xOffset, yOffset);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          #随笔
 
-          
+纯代码加载自定义视图:
+
+1234567891011// 在控制器创建自定义视图对象后直接加载自定义视图:- (instancetype)initWithFrame:(CGRect)frame &#123;    self = [super initWithFrame:frame];   
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/04/03/GridViewLayout/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1125,9 +1140,9 @@
   </span>
 
   <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="刘宏立">
+    <meta itemprop="name" content="刘宏立博客">
     <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="刘宏立" src="">
+      <img style="display:none;" itemprop="url image" alt="刘宏立博客" src="">
     </span>
   </span>
 
@@ -1206,12 +1221,19 @@
       
         
           
-            <h1 id="iOS开发常用工具使用手册"><a href="#iOS开发常用工具使用手册" class="headerlink" title="iOS开发常用工具使用手册"></a>iOS开发常用工具使用手册</h1><h2 id="一、索引"><a href="#一、索引" class="headerlink" title="一、索引"></a>一、索引</h2><p>### </p>
-<ol>
-<li><a href="http://sketch.im" target="_blank" rel="external">Sketch 中文</a></li>
-</ol>
+          iOS开发常用工具使用手册一、索引### 
+
+Sketch 中文
+
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/03/25/使用手册 - iOS开发常用工具/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1259,9 +1281,9 @@
   </span>
 
   <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="刘宏立">
+    <meta itemprop="name" content="刘宏立博客">
     <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="刘宏立" src="">
+      <img style="display:none;" itemprop="url image" alt="刘宏立博客" src="">
     </span>
   </span>
 
@@ -1340,8 +1362,15 @@
       
         
           
-            
           
+          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/03/25/对象方法的封装/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1389,9 +1418,9 @@
   </span>
 
   <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="刘宏立">
+    <meta itemprop="name" content="刘宏立博客">
     <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="刘宏立" src="">
+      <img style="display:none;" itemprop="url image" alt="刘宏立博客" src="">
     </span>
   </span>
 
@@ -1470,15 +1499,15 @@
       
         
           
-            <h2 id="1-相册管理"><a href="#1-相册管理" class="headerlink" title="1. 相册管理"></a>1. 相册管理</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">将截图存入相册时需要在 Info.plist 中添加设置: Privacy - Photo Library Usage Description</div><div class="line">例如: 集成高德地图后将地图截图存入到相册:</div><div class="line">// 地图截屏</div><div class="line">- (void)gaodeMapSnapshotScreen &#123;</div><div class="line">[self.mapView takeSnapshotInRect:self.view.bounds];</div><div class="line">__block UIImage *screenshotImage = nil;</div><div class="line">__block NSInteger resState = 0;</div><div class="line">[self.mapView takeSnapshotInRect:self.view.bounds withCompletionBlock:^(UIImage *resultImage, NSInteger state) &#123;</div><div class="line">screenshotImage = resultImage;</div><div class="line">resState = state; // state表示地图此时是否完整，0-不完整，1-完整</div><div class="line">&#125;];</div><div class="line">self.snapImage = screenshotImage;  // 获取地图截图图片</div><div class="line">UIImageWriteToSavedPhotosAlbum(self.snapImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil); // 存到相册方法</div><div class="line">&#125;</div><div class="line">// 是否完成保存到相册</div><div class="line">- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo&#123;</div><div class="line">if (error == nil) &#123;</div><div class="line">UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@&quot;提示&quot; message:@&quot;截图成功,已存入相册!\n请打开手机相册查看\n🙂🙂🙂&quot; delegate:self cancelButtonTitle:nil otherButtonTitles:@&quot;确定&quot;, nil];</div><div class="line">[alert show];</div><div class="line">&#125;else&#123;</div><div class="line">UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@&quot;提示&quot; message:@&quot;保存失败&quot; delegate:self cancelButtonTitle:nil otherButtonTitles:@&quot;确定&quot;, nil];</div><div class="line">[alert show];</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="2-高德地图"><a href="#2-高德地图" class="headerlink" title="2.高德地图"></a>2.高德地图</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">1. [高德地图获取自有数据](http://lbs.amap.com/api/ios-sdk/guide/map-data/cloud-poi#local)</div></pre></td></tr></table></figure>
-<h2 id="2-QMUI的使用-二-iOS幽灵按钮ghostButton"><a href="#2-QMUI的使用-二-iOS幽灵按钮ghostButton" class="headerlink" title="2. QMUI的使用(二) - iOS幽灵按钮ghostButton"></a>2. QMUI的使用(二) - iOS幽灵按钮ghostButton</h2><h5 id="iOS开发UI组件腾讯QMUI框架-iOS-介绍"><a href="#iOS开发UI组件腾讯QMUI框架-iOS-介绍" class="headerlink" title="iOS开发UI组件腾讯QMUI框架(iOS)介绍"></a>iOS开发UI组件<a href="http://www.jianshu.com/p/9bcdacb5cbe0" target="_blank" rel="external">腾讯QMUI框架(iOS)介绍</a></h5><h4 id="1-幽灵按钮的使用"><a href="#1-幽灵按钮的使用" class="headerlink" title="1. 幽灵按钮的使用"></a>1. 幽灵按钮的使用</h4><p><img src="http://upload-images.jianshu.io/upload_images/2553151-5738554d064850b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="幽灵按钮效果图.png"></p>
-<p>实现上面效果的代码:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">- (void)initSubviews &#123;</div><div class="line">[super initSubviews];</div><div class="line">self.ghostButton1 = [[QMUIGhostButton alloc]initWithGhostType:QMUIGhostButtonColorBlue];</div><div class="line">self.ghostButton1.titleLabel.font = UIFontMake(14);</div><div class="line">[self.ghostButton1 setTitle:@&quot;QMUIGhostButtonColorBlue&quot; forState:UIControlStateNormal];</div><div class="line">self.ghostButton1.cornerRadius = 20;  // 默认为按钮高度的一半,改变数值以改变圆角大小</div><div class="line">[self.view addSubview:self.ghostButton1];</div><div class="line"></div><div class="line">self.ghostButton2 = [[QMUIGhostButton alloc]init];</div><div class="line">self.ghostButton2.ghostColor = [UIColor grayColor]; // 自定义幽灵按钮的颜色(这里不是QMUI的枚举颜色)</div><div class="line">self.ghostButton2.titleLabel.font = UIFontMake(14);</div><div class="line">[self.ghostButton2 setTitle:@&quot;QMUIGhostButtonColorRed&quot; forState:UIControlStateNormal];</div><div class="line">[self.view addSubview:self.ghostButton2];</div><div class="line"></div><div class="line">self.separatorLayer1 = [QDCommonUI generateSeparatorLayer];</div><div class="line">[self.view.layer addSublayer:self.separatorLayer1];</div><div class="line">self.separatorLayer2 = [QDCommonUI generateSeparatorLayerColorBlue]; // 如果要改变分割线的颜色,在QDCommonUI文件中添加类对应的方法即可.</div><div class="line">[self.view.layer addSublayer:self.separatorLayer2];</div><div class="line">&#125;</div><div class="line">- (void)viewDidLayoutSubviews &#123;</div><div class="line">[super viewDidLayoutSubviews];</div><div class="line">CGFloat contentMinY = CGRectGetMaxY(self.navigationController.navigationBar.frame);</div><div class="line">CGFloat buttonSpacingHeight = 72;</div><div class="line">CGSize buttonSize = CGSizeMake(260, 40);</div><div class="line">CGFloat buttonMinX = CGFloatGetCenter(CGRectGetWidth(self.view.bounds), buttonSize.width);</div><div class="line">CGFloat buttonOffsetY = CGFloatGetCenter(buttonSpacingHeight, buttonSize.height);</div><div class="line"></div><div class="line">self.ghostButton1.frame = CGRectFlatMake(buttonMinX, contentMinY + buttonOffsetY, buttonSize.width, buttonSize.height);</div><div class="line">self.ghostButton2.frame = CGRectFlatMake(buttonMinX, contentMinY + buttonSpacingHeight + buttonOffsetY, buttonSize.width, buttonSize.height);</div><div class="line"></div><div class="line">self.separatorLayer1.frame = CGRectMake(0, contentMinY + buttonSpacingHeight - PixelOne, CGRectGetWidth(self.view.bounds), PixelOne);</div><div class="line">self.separatorLayer2.frame = CGRectMake(0, contentMinY + buttonSpacingHeight * 2 - PixelOne, CGRectGetWidth(self.view.bounds), PixelOne);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>还支持设置带有图片的幽灵按钮,图片可以通过枚举类型设置图片在按钮标题的上左下右,支持设置图片和标题的间隔,具体代码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">self.ghostButton3 = [[QMUIGhostButton alloc] initWithGhostType:QMUIGhostButtonColorGreen];</div><div class="line">self.ghostButton3.titleLabel.font = UIFontMake(14);</div><div class="line">[self.ghostButton3 setTitle:@&quot;点击修改ghostColor&quot; forState:UIControlStateNormal];</div><div class="line">[self.ghostButton3 setImage:UIImageMake(@&quot;icon_emotion&quot;) forState:UIControlStateNormal];</div><div class="line">self.ghostButton3.imageEdgeInsets = UIEdgeInsetsMake(0, 6, 0, 0);    //设置图片和标题的间隔</div><div class="line">self.ghostButton3.imagePosition = QMUIButtonImagePositionRight;      //默认为QMUIButtonImagePositionLeft</div><div class="line">self.ghostButton3.adjustsImageWithGhostColor = YES;</div><div class="line">[self.ghostButton3 addTarget:self action:@selector(handleGhostButtonColorEvent) forControlEvents:UIControlEventTouchUpInside];</div><div class="line">[self.view addSubview:self.ghostButton3];</div></pre></td></tr></table></figure></p>
-<p>效果如下:</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2553151-6e77646880694ce2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="带图片的幽灵按钮.png"></p>
-
-          
+          1. 相册管理123456789101112131415161718192021222324将截图存入相册时需要在 Info.plist 中添加设置: Privacy - Photo Library Usage Description例如: 集成高德地图后将地图截图存入到相册:// 地图截屏- (v
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/02/18/iOS游戏开发笔记/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1526,9 +1555,9 @@
   </span>
 
   <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="刘宏立">
+    <meta itemprop="name" content="刘宏立博客">
     <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="刘宏立" src="">
+      <img style="display:none;" itemprop="url image" alt="刘宏立博客" src="">
     </span>
   </span>
 
@@ -1607,27 +1636,16 @@
       
         
           
-            <h2 id="1-启动QMUI的配置模板和渲染全局控件样式"><a href="#1-启动QMUI的配置模板和渲染全局控件样式" class="headerlink" title="1. 启动QMUI的配置模板和渲染全局控件样式"></a>1. 启动QMUI的配置模板和渲染全局控件样式</h2><p>在AppDelegate中写入以下代码:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">#import &quot;AppDelegate.h&quot;</div><div class="line">#import &quot;QMUIConfigurationTemplate.h&quot;</div><div class="line"></div><div class="line">@interface AppDelegate ()</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">@implementation AppDelegate</div><div class="line"></div><div class="line">- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions &#123;</div><div class="line"></div><div class="line">// 启动QMUI的配置模板</div><div class="line">[QMUIConfigurationTemplate setupConfigurationTemplate];</div><div class="line">// 将全局的控件样式渲染出来</div><div class="line">[QMUIConfigurationManager renderGlobalAppearances];</div><div class="line">return YES;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="2-QMUI的使用-二-iOS幽灵按钮ghostButton"><a href="#2-QMUI的使用-二-iOS幽灵按钮ghostButton" class="headerlink" title="2. QMUI的使用(二) - iOS幽灵按钮ghostButton"></a>2. QMUI的使用(二) - iOS幽灵按钮ghostButton</h2><h5 id="iOS开发UI组件腾讯QMUI框架-iOS-介绍"><a href="#iOS开发UI组件腾讯QMUI框架-iOS-介绍" class="headerlink" title="iOS开发UI组件腾讯QMUI框架(iOS)介绍"></a>iOS开发UI组件<a href="http://www.jianshu.com/p/9bcdacb5cbe0" target="_blank" rel="external">腾讯QMUI框架(iOS)介绍</a></h5><h4 id="1-幽灵按钮的使用"><a href="#1-幽灵按钮的使用" class="headerlink" title="1. 幽灵按钮的使用"></a>1. 幽灵按钮的使用</h4><p><img src="http://upload-images.jianshu.io/upload_images/2553151-5738554d064850b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="幽灵按钮效果图.png"></p>
-<p>实现上面效果的代码:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">- (void)initSubviews &#123;</div><div class="line">[super initSubviews];</div><div class="line">self.ghostButton1 = [[QMUIGhostButton alloc]initWithGhostType:QMUIGhostButtonColorBlue];</div><div class="line">self.ghostButton1.titleLabel.font = UIFontMake(14);</div><div class="line">[self.ghostButton1 setTitle:@&quot;QMUIGhostButtonColorBlue&quot; forState:UIControlStateNormal];</div><div class="line">self.ghostButton1.cornerRadius = 20;  // 默认为按钮高度的一半,改变数值以改变圆角大小</div><div class="line">[self.view addSubview:self.ghostButton1];</div><div class="line"></div><div class="line">self.ghostButton2 = [[QMUIGhostButton alloc]init];</div><div class="line">self.ghostButton2.ghostColor = [UIColor grayColor]; // 自定义幽灵按钮的颜色(这里不是QMUI的枚举颜色)</div><div class="line">self.ghostButton2.titleLabel.font = UIFontMake(14);</div><div class="line">[self.ghostButton2 setTitle:@&quot;QMUIGhostButtonColorRed&quot; forState:UIControlStateNormal];</div><div class="line">[self.view addSubview:self.ghostButton2];</div><div class="line"></div><div class="line">self.separatorLayer1 = [QDCommonUI generateSeparatorLayer];</div><div class="line">[self.view.layer addSublayer:self.separatorLayer1];</div><div class="line">self.separatorLayer2 = [QDCommonUI generateSeparatorLayerColorBlue]; // 如果要改变分割线的颜色,在QDCommonUI文件中添加类对应的方法即可.</div><div class="line">[self.view.layer addSublayer:self.separatorLayer2];</div><div class="line">&#125;</div><div class="line">- (void)viewDidLayoutSubviews &#123;</div><div class="line">[super viewDidLayoutSubviews];</div><div class="line">CGFloat contentMinY = CGRectGetMaxY(self.navigationController.navigationBar.frame);</div><div class="line">CGFloat buttonSpacingHeight = 72;</div><div class="line">CGSize buttonSize = CGSizeMake(260, 40);</div><div class="line">CGFloat buttonMinX = CGFloatGetCenter(CGRectGetWidth(self.view.bounds), buttonSize.width);</div><div class="line">CGFloat buttonOffsetY = CGFloatGetCenter(buttonSpacingHeight, buttonSize.height);</div><div class="line"></div><div class="line">self.ghostButton1.frame = CGRectFlatMake(buttonMinX, contentMinY + buttonOffsetY, buttonSize.width, buttonSize.height);</div><div class="line">self.ghostButton2.frame = CGRectFlatMake(buttonMinX, contentMinY + buttonSpacingHeight + buttonOffsetY, buttonSize.width, buttonSize.height);</div><div class="line"></div><div class="line">self.separatorLayer1.frame = CGRectMake(0, contentMinY + buttonSpacingHeight - PixelOne, CGRectGetWidth(self.view.bounds), PixelOne);</div><div class="line">self.separatorLayer2.frame = CGRectMake(0, contentMinY + buttonSpacingHeight * 2 - PixelOne, CGRectGetWidth(self.view.bounds), PixelOne);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>还支持设置带有图片的幽灵按钮,图片可以通过枚举类型设置图片在按钮标题的上左下右,支持设置图片和标题的间隔,具体代码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">self.ghostButton3 = [[QMUIGhostButton alloc] initWithGhostType:QMUIGhostButtonColorGreen];</div><div class="line">self.ghostButton3.titleLabel.font = UIFontMake(14);</div><div class="line">[self.ghostButton3 setTitle:@&quot;点击修改ghostColor&quot; forState:UIControlStateNormal];</div><div class="line">[self.ghostButton3 setImage:UIImageMake(@&quot;icon_emotion&quot;) forState:UIControlStateNormal];</div><div class="line">self.ghostButton3.imageEdgeInsets = UIEdgeInsetsMake(0, 6, 0, 0);    //设置图片和标题的间隔</div><div class="line">self.ghostButton3.imagePosition = QMUIButtonImagePositionRight;      //默认为QMUIButtonImagePositionLeft</div><div class="line">self.ghostButton3.adjustsImageWithGhostColor = YES;</div><div class="line">[self.ghostButton3 addTarget:self action:@selector(handleGhostButtonColorEvent) forControlEvents:UIControlEventTouchUpInside];</div><div class="line">[self.view addSubview:self.ghostButton3];</div></pre></td></tr></table></figure></p>
-<p>效果如下:</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2553151-6e77646880694ce2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="带图片的幽灵按钮.png"></p>
-<h2 id="3-QMUI的使用-三-iOS搜索标签的流水布局"><a href="#3-QMUI的使用-三-iOS搜索标签的流水布局" class="headerlink" title="3.QMUI的使用(三) - iOS搜索标签的流水布局"></a>3.QMUI的使用(三) - iOS搜索标签的流水布局</h2><p>注:项目是基于QMUI框架,因此实现此效果需pod或手动安装QMUIKit框架<br>项目<a href="https://github.com/cellgit/QMUIFloatLayoutView" target="_blank" rel="external">github下载</a></p>
-<h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><ol>
-<li>安装QMUI框架:<a href="http://qmuiteam.com/ios/page/start.html#qw_downloadForUse" target="_blank" rel="external">安装方法</a></li>
-<li>在AppDelegate启动QMUI的配置模板和渲染全局控件样式:<a href="http://www.jianshu.com/p/1a31c80c8b85" target="_blank" rel="external">设置方法</a></li>
-<li>在pod文件中找到QMUIConfigurationTemplate,将.h和.m拖入到目录下,如果出现文件重复,将pod中.h文件代码注释掉即可.(这里也可以下载QMUI官方Demo,将Demo中的组件Common文件直接拖入并复制到自己的项目中,出现重复文件报错处理方法同pod一样处理即可)</li>
-<li>在viewController文件中导入<code>#import &quot;QMUICommonViewController.h&quot;</code></li>
-<li>编写代码如下:</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">#import &quot;ViewController.h&quot;</div><div class="line">#import &quot;QMUICommonViewController.h&quot;</div><div class="line"></div><div class="line">@interface ViewController ()</div><div class="line"></div><div class="line">@property(nonatomic, strong) QMUIFloatLayoutView *floatLayoutView;</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">@implementation ViewController</div><div class="line"></div><div class="line">- (void)viewDidLoad &#123;</div><div class="line">[super viewDidLoad];</div><div class="line"></div><div class="line">self.title = @&quot;QMUIFloatLayoutView&quot;;</div><div class="line"></div><div class="line">self.floatLayoutView = [[QMUIFloatLayoutView alloc] init];</div><div class="line">self.floatLayoutView.padding = UIEdgeInsetsMake(12, 12, 12, 12);</div><div class="line">self.floatLayoutView.itemMargins = UIEdgeInsetsMake(0, 0, 10, 10);</div><div class="line">self.floatLayoutView.minimumItemSize = CGSizeMake(69, 29);// 以2个字的按钮作为最小宽度</div><div class="line">self.floatLayoutView.layer.borderWidth = PixelOne; //边框注释即消失</div><div class="line">self.floatLayoutView.layer.borderColor = UIColorSeparator.CGColor;</div><div class="line">[self.view addSubview:self.floatLayoutView];</div><div class="line"></div><div class="line">NSArray&lt;NSString *&gt; *suggestions = @[@&quot;iOS&quot;, @&quot;刘宏立&quot;, @&quot;安徽工程大学&quot;, @&quot;北京市&quot;, @&quot;苹果开发者&quot;, @&quot;地铁太挤&quot;, @&quot;奥林匹克森林公园&quot;];</div><div class="line">for (NSInteger i = 0; i &lt; suggestions.count; i++) &#123;</div><div class="line">QMUIGhostButton *button = [[QMUIGhostButton alloc] initWithGhostType:QMUIGhostButtonColorGray];</div><div class="line">[button setTitle:suggestions[i] forState:UIControlStateNormal];</div><div class="line">button.titleLabel.font = UIFontMake(14);</div><div class="line">button.contentEdgeInsets = UIEdgeInsetsMake(6, 20, 6, 20);</div><div class="line">[self.floatLayoutView addSubview:button];</div><div class="line">&#125;</div><div class="line"></div><div class="line">UIEdgeInsets padding = UIEdgeInsetsMake(CGRectGetMaxY(self.navigationController.navigationBar.frame) + 36, 24, 36, 24);</div><div class="line">CGFloat contentWidth = CGRectGetWidth(self.view.bounds) - UIEdgeInsetsGetHorizontalValue(padding);</div><div class="line">CGSize floatLayoutViewSize = [self.floatLayoutView sizeThatFits:CGSizeMake(contentWidth, CGFLOAT_MAX)];</div><div class="line">self.floatLayoutView.frame = CGRectMake(padding.left, padding.top, contentWidth, floatLayoutViewSize.height);</div><div class="line"></div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure>
-<p>最终效果图</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2553151-ba27a5ee90344f8a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="搜索标签样式流水布局.png"></p>
-<p>注:项目源于  QMUI 的一个功能,这里将其拆分开来</p>
-
-          
+          1. 启动QMUI的配置模板和渲染全局控件样式在AppDelegate中写入以下代码:
+1234567891011121314151617#import &quot;AppDelegate.h&quot;#import &quot;QMUIConfigurationTemplate.h&quot;@
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/02/18/The First/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
