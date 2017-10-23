@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+    
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >fi3ework&#39;s Studio.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">iOS字典转模型,模型转字典 和 泛型</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>fi3ework's Studio.</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-img" style="background-image: url(http://oumn0o088.bkt.clouddn.com/post-bg.jpg)"></div>
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            iOS字典转模型,模型转字典 和 泛型
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2017/04/06</span>
+            </div>
+        
+    </div>
+</div>
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <script>
+            var browser = {
+                    versions: function () {
+                        var u = window.navigator.userAgent;
+                        return {
+                            userAgent: u,
+                            trident: u.indexOf('Trident') > -1, //IE内核
+                            presto: u.indexOf('Presto') > -1, //opera内核
+                            webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                            gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                            mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                            ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                            android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+                            iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+                            iPad: u.indexOf('iPad') > -1, //是否为iPad
+                            webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+                            weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+                            uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+                        };
+                    }()
+                }
+
+            function fontLoaded(){
+                console.log('font loaded');
+                if (document.getElementsByClassName('site-intro-meta')) {
+                    document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+                    document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+                    var postIntroTags = document.getElementsByClassName('post-intro-tags')[0],
+                        postIntroMeat = document.getElementsByClassName('post-intro-meta')[0];
+                        if (postIntroTags) {
+                            postIntroTags.classList.add('post-fade-in');
+                        }
+                        if (postIntroMeat) {
+                            postIntroMeat.classList.add('post-fade-in');
+                        }
+                    }
+                }
+                
+            console.log("userAgent:" + browser.versions.userAgent);
+            // UC不支持跨域，所以直接显示
+            if (browser.versions.uc) {
+                console.log("UCBrowser");
+                fontLoaded();
+            } else {
+                WebFont.load({
+                    custom: {
+                        families: ['Oswald-Regular']
+                    },
+                    loading: function () {  //所有字体开始加载
+                        // console.log('loading');
+                    },
+                    active: function () {  //所有字体已渲染
+                        fontLoaded();
+                    },
+                    inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+                        console.log('inactive: timeout');
+                        fontLoaded();
+                    },
+                    timeout: 7000 // Set the timeout to two seconds
+                });
+            }
+        </script>
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="KVC字典转模型-四种方法"><a href="#KVC字典转模型-四种方法" class="headerlink" title="KVC字典转模型: 四种方法"></a>KVC字典转模型: 四种方法</h1><h2 id="建议的方法"><a href="#建议的方法" class="headerlink" title="建议的方法"></a>建议的方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">方法四: 建议通过这种方法字典转模型</div><div class="line">+ (instancetype)personWithDict:(NSDictionary *)dict &#123;</div><div class="line">    return [[self alloc] initWithDict:dict];</div><div class="line">&#125;</div><div class="line">- (instancetype)initWithDict:(NSDictionary *)dict &#123;</div><div class="line">    self = [super init];</div><div class="line">    if (self) &#123;</div><div class="line">        // 方法4 KVC 字典转模型大招 -&gt; 内部实际上就是方法3的实现</div><div class="line">        [self setValuesForKeysWithDictionary:dict];</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><p>1.准备字典数据;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">在控制器中写入:</div><div class="line">NSDictionary *dict = @&#123;@&quot;name&quot;: @&quot;lao wang&quot;, @&quot;age&quot;: @180&#125;;</div></pre></td></tr></table></figure>
+<p>2.新建 Person 模型文件;</p>
+<p>3.定义属性和模型构造函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line"></div><div class="line">@interface Person : NSObject</div><div class="line"></div><div class="line">@property (nonatomic, copy) NSString *name;</div><div class="line">@property (nonatomic, assign) NSInteger age;</div><div class="line">@property (nonatomic, copy) NSString *title;</div><div class="line"></div><div class="line">#pragma mark - 模型构造函数</div><div class="line">+ (instancetype)personWithDict:(NSDictionary *)dict;</div><div class="line">- (instancetype)initWithDict:(NSDictionary *)dict;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>4.字典转模型(四种方法)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">方法一:</div><div class="line">+ (instancetype)personWithDict:(NSDictionary *)dict &#123;</div><div class="line">    return [[self alloc] initWithDict:dict];</div><div class="line">&#125;</div><div class="line">- (instancetype)initWithDict:(NSDictionary *)dict &#123;</div><div class="line">    self = [super init];</div><div class="line">    if (self) &#123;</div><div class="line">        // 方法1 传统写法</div><div class="line">        _name = dict[@&quot;name&quot;];</div><div class="line">        // 字典不能保存基本数据类型，NSNumber -&gt;</div><div class="line">        _age = [dict[@&quot;age&quot;] integerValue];</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">方法二:</div><div class="line">+ (instancetype)personWithDict:(NSDictionary *)dict &#123;</div><div class="line">    return [[self alloc] initWithDict:dict];</div><div class="line">&#125;</div><div class="line">- (instancetype)initWithDict:(NSDictionary *)dict &#123;</div><div class="line">    self = [super init];</div><div class="line">    if (self) &#123;</div><div class="line">        // 方法2 KVC - `间接`通过 key 设置数值</div><div class="line">        // 注意：基本数据类型，不需要转换，KVC 可以自动实现转换！</div><div class="line">        [self setValue:dict[@&quot;name&quot;] forKey:@&quot;name&quot;];</div><div class="line">        [self setValue:dict[@&quot;age&quot;] forKey:@&quot;age&quot;];</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">方法三:</div><div class="line">+ (instancetype)personWithDict:(NSDictionary *)dict &#123;</div><div class="line">    return [[self alloc] initWithDict:dict];</div><div class="line">&#125;</div><div class="line">- (instancetype)initWithDict:(NSDictionary *)dict &#123;</div><div class="line">    self = [super init];</div><div class="line">    if (self) &#123;</div><div class="line">        // 方法3 KVC 循环遍历字典</div><div class="line">        for (NSString *key in dict) &#123;</div><div class="line">            // 1. 通过 key 取值</div><div class="line">            id value = dict[key];</div><div class="line">            // 2. 通过 KVC 方法设置数值</div><div class="line">            // - key 对应对象的 `属性`，如果属性不存在就崩溃</div><div class="line">            [self setValue:value forKey:key];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">方法四: 建议通过这种方法字典转模型</div><div class="line">+ (instancetype)personWithDict:(NSDictionary *)dict &#123;</div><div class="line">    return [[self alloc] initWithDict:dict];</div><div class="line">&#125;</div><div class="line">- (instancetype)initWithDict:(NSDictionary *)dict &#123;</div><div class="line">    self = [super init];</div><div class="line">    if (self) &#123;</div><div class="line">        // 方法4 KVC 字典转模型大招 -&gt; 内部实际上就是方法3的实现</div><div class="line">        [self setValuesForKeysWithDictionary:dict];</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="KVC-的模型转字典"><a href="#KVC-的模型转字典" class="headerlink" title="KVC 的模型转字典"></a>KVC 的模型转字典</h1><p>1.为了便与调试会重写 description 方法, 其中会用到<code>模型转字典</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> KVC `keyed value coding` 键值编码</div><div class="line"> </div><div class="line"> - 如果属性不在字典的 keys 中，运行属性不会被设置值</div><div class="line"> - 如果字典中，存在没有属性的 key，运行默认会崩溃！</div><div class="line"> */</div><div class="line"></div><div class="line">// 默认情况下，如果数出自定义对象，只会输出 class / 指针，不便于调试</div><div class="line">// 日常开发中，如果涉及到**模型**，建议`重写` description，改写输出信息！有利于模型数据的调试</div><div class="line">- (NSString *)description &#123;</div><div class="line">    // 如果提供了错误的 key，同样会崩溃</div><div class="line">    NSArray *keys = @[@&quot;name&quot;, @&quot;age&quot;, @&quot;title&quot;]; // @&quot;xxx&quot;</div><div class="line">    </div><div class="line">    // KVC 的模型转字典，能够将给定键值数组，转换成对应的`字典`，便于输出！</div><div class="line">    return [self dictionaryWithValuesForKeys:keys].description;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="关于泛型"><a href="#关于泛型" class="headerlink" title="关于泛型:"></a>关于泛型:</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">- (void)viewDidLoad &#123;</div><div class="line">    [super viewDidLoad];</div><div class="line">    </div><div class="line">    // - OC 中数组，可以存放任意类型的对象</div><div class="line">    // - 数组是通过下标访问内部元素！</div><div class="line">    // - 数组中绝大多数，放的是相通类型的元素！</div><div class="line">    // &lt;Person *&gt; 表示数组中只存放 Person 对象</div><div class="line">    // - 定义了泛型数组之后，如果添加的对象，和指定类型不匹配，会立即警告，可以提前发现错误！</div><div class="line">    // - 定义了泛型数组之后，就可以通过 `.` 语法直接取数组内部的属性</div><div class="line">    // 关于 `泛型` 主要在 Swift 中使用，OC 中涉及的主要就在 `数组` 的定义</div><div class="line">    NSMutableArray &lt;Person *&gt;*arrayM = [NSMutableArray array];</div><div class="line">    </div><div class="line">    // 如果 key 没有与之对应的属性，会崩溃！</div><div class="line">    // --- 添加第 0 个对象</div><div class="line">    NSDictionary *dict1 = @&#123;@&quot;name&quot;: @&quot;liisXXX&quot;, @&quot;age&quot;: @10&#125;;</div><div class="line">    Person *p1 = [Person personWithDict:dict1];</div><div class="line">    </div><div class="line">    // 添加到数组</div><div class="line">    [arrayM addObject:p1];</div><div class="line">    </div><div class="line">    // --- 添加第 1 个对象</div><div class="line">    NSDictionary *dict2 = @&#123;@&quot;name&quot;: @&quot;lao wang&quot;, @&quot;age&quot;: @180&#125;;</div><div class="line">    Person *p2 = [Person personWithDict:dict2];</div><div class="line">    </div><div class="line">    // 添加到数组</div><div class="line">    [arrayM addObject:p2];</div><div class="line">    </div><div class="line">    // OC 中自定义对象默认只能数出 class / 指针</div><div class="line">    NSLog(@&quot;%@&quot;, arrayM);</div><div class="line">    </div><div class="line">    // --- 添加一个其它类型到数组</div><div class="line">    UIButton *btn = [UIButton buttonWithType:UIButtonTypeContactAdd];</div><div class="line">    // 定义了泛型数组之后，如果添加的对象，和指定类型不匹配，会立即警告，可以提前发现错误！</div><div class="line">    [arrayM addObject:btn];</div><div class="line">    </div><div class="line">    // 通过下标访问元素</div><div class="line">    // - Xcode 7.0 之前，要取属性，需要发送消息的方式，以为可以给 id 类型发送任意消息</div><div class="line">    NSString *name = [arrayM[0] name];</div><div class="line">    // 定义了泛型数组之后，就可以通过 `.` 语法直接取数组内部的属性</div><div class="line">    NSInteger age = arrayM[0].age;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-pager">
+        
+            <li class="next">
+                <a href= "/2017/05/07/LBS001/" title= 游戏开发笔记2(iOS) >
+                    <span>Next Post</span>
+                    <span>游戏开发笔记2(iOS)</span>
+                </a>
+            </li>
+        
+        
+            <li class="previous">
+                <a href= "/2017/04/04/UIScrollView/" title= UIScrollView >
+                    <span>Previous Post</span>
+                    <span>UIScrollView</span>
+                </a>
+            </li>
+        
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!--PC版-->
+
+    <!--PC版-->
+
+
+    
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:12345@qq.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/fi3ework" class="iconfont-archer github" target="_blank" title="github"></a>
+            
+        
+    
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title="rss"></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">Theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper">
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#KVC字典转模型-四种方法"><span class="toc-number">1.</span> <span class="toc-text">KVC字典转模型: 四种方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#建议的方法"><span class="toc-number">1.1.</span> <span class="toc-text">建议的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#准备工作"><span class="toc-number">1.1.1.</span> <span class="toc-text">准备工作</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#KVC-的模型转字典"><span class="toc-number">2.</span> <span class="toc-text">KVC 的模型转字典</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#关于泛型"><span class="toc-number">3.</span> <span class="toc-text">关于泛型:</span></a></li></ol>
+    </div>
+    
+    <div class="back-top">&#xe639;</div>
+    <div class="sidebar">
+    <div class="sidebar-header sidebar-header-show-archive">
+        <div class="sidebar-category">
+            <span class="sidebar-archive-link"><span class="iconfont-archer">&#xe67d;</span>Archive</span>
+            <span class="sidebar-tags-link"><span class="iconfont-archer">&#xe610;</span>Tag</span>
+        </div>
+    </div>
+    <div class="sidebar-content sidebar-content-show-archive">
+        
+        <div class="sidebar-tags">
+    <div class="sidebar-tags-name">
+    
+    </div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #888; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: false
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tag-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var jsInfo = {
+        root: '/'
+    }
+</script>
+    <!-- 不蒜子  -->
+    
+    <!-- CNZZ统计  -->
+    
+    </div>
+    </body>
+</html>
+
+
