@@ -99,13 +99,15 @@ Get documents directory and file path(获取沙盒和具体文件路径)1. SWDoc
 Saturday, Sep 8, 2018, ShaHe University Park, BeiJing : 北京昌平沙河高教园
 Get documents directory and file path(获取沙盒和具体文件路径)1. SWDocumentsManager 管理路径的方法
 123456789101112131415imp">
-<meta property="og:updated_time" content="2018-10-01T14:25:43.977Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2553151-ec7b9e8fcb54df57.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/325">
+<meta property="og:updated_time" content="2018-10-01T14:45:54.144Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS 获取文件路径">
 <meta name="twitter:description" content="Tip: 2018, Develop With Swift
 Saturday, Sep 8, 2018, ShaHe University Park, BeiJing : 北京昌平沙河高教园
 Get documents directory and file path(获取沙盒和具体文件路径)1. SWDocumentsManager 管理路径的方法
 123456789101112131415imp">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/2553151-ec7b9e8fcb54df57.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/325">
 
 
 
@@ -391,6 +393,8 @@ Get documents directory and file path(获取沙盒和具体文件路径)1. SWDoc
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> UIKit</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SWDocumentsManager</span>: <span class="title">NSObject</span> </span>&#123;</div><div class="line">    <span class="keyword">static</span> <span class="keyword">let</span> shared = <span class="type">SWDocumentsManager</span>()   <span class="comment">/// 管理路径的管家</span></div><div class="line">    <span class="comment">/// 获取沙盒路径</span></div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">documentDirectory</span><span class="params">()</span></span> -&gt; <span class="type">URL</span> &#123;</div><div class="line">        <span class="keyword">let</span> urls = <span class="type">FileManager</span>.<span class="keyword">default</span>.urls(<span class="keyword">for</span>: .documentDirectory, <span class="keyword">in</span>: .userDomainMask)</div><div class="line">        <span class="keyword">return</span> urls[<span class="number">0</span>]</div><div class="line">    &#125;</div><div class="line">    <span class="comment">/// 获取具体文件路径</span></div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">fileUrl</span><span class="params">(<span class="number">_</span> fileName: String)</span></span> -&gt; <span class="type">URL</span> &#123;</div><div class="line">        <span class="keyword">let</span> documentUrl = <span class="keyword">self</span>.documentDirectory().appendingPathComponent(fileName)</div><div class="line">        <span class="keyword">return</span> documentUrl</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><code>2.通过单例调用获取路径的方法</code> </p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">path</span><span class="params">()</span></span> &#123;</div><div class="line">    <span class="comment">/// 获取沙盒路径</span></div><div class="line">    <span class="keyword">let</span> doctmentsDirUrl = <span class="type">SWDocumentsManager</span>.shared.documentDirectory()</div><div class="line">    <span class="comment">/// 获取具体文件路径</span></div><div class="line">    <span class="keyword">let</span> plistUrl = <span class="type">SWDocumentsManager</span>.shared.fileUrl(<span class="string">"EpisodeList.plist"</span>)</div><div class="line">    <span class="built_in">print</span>(<span class="string">"Doctments Dir Url: ===== <span class="subst">\(doctmentsDirUrl)</span>"</span>)</div><div class="line">    <span class="built_in">print</span>(<span class="string">"Plist File Url: ===== <span class="subst">\(plistUrl)</span>"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>3. 效果图</code></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/2553151-ec7b9e8fcb54df57.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/325" alt="filePath001.png"></p>
 
       
     </div>
