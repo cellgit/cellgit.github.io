@@ -1,0 +1,829 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="以下算法参考 &amp;lt;&amp;lt;算法&amp;gt;&amp;gt; 第4版[美] Robert Sedgewick
+#####1. 欧几里德算法123456789101112131415161718192021- (void)viewDidLoad &amp;#123;    [super viewDidLoad];    [self calculateGreatestCommonDivisorP:30 q:6]; //">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法(一)">
+<meta property="og:url" content="http://yoursite.com/2017/10/24/算法(一)/index.html">
+<meta property="og:site_name" content="刘宏立博客">
+<meta property="og:description" content="以下算法参考 &amp;lt;&amp;lt;算法&amp;gt;&amp;gt; 第4版[美] Robert Sedgewick
+#####1. 欧几里德算法123456789101112131415161718192021- (void)viewDidLoad &amp;#123;    [super viewDidLoad];    [self calculateGreatestCommonDivisorP:30 q:6]; //">
+<meta property="og:updated_time" content="2017-10-23T18:20:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="算法(一)">
+<meta name="twitter:description" content="以下算法参考 &amp;lt;&amp;lt;算法&amp;gt;&amp;gt; 第4版[美] Robert Sedgewick
+#####1. 欧几里德算法123456789101112131415161718192021- (void)viewDidLoad &amp;#123;    [super viewDidLoad];    [self calculateGreatestCommonDivisorP:30 q:6]; //">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/10/24/算法(一)/"/>
+
+
+
+
+
+  <title> 算法(一) | 刘宏立博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?1eef4774f136a603e75fbfcecc58b620";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">刘宏立博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-jianshu">
+          <a href="http://www.jianshu.com/u/4adfcdce1900/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            简书
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/24/算法(一)/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="刘宏立">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/uploads/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="刘宏立博客">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="刘宏立博客" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                算法(一)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-24T02:04:52+08:00">
+                2017-10-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/24/算法(一)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/10/24/算法(一)/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>以下算法参考 &lt;&lt;算法&gt;&gt; 第4版[美] Robert Sedgewick</p>
+<p>#####1. 欧几里德算法<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">    [<span class="keyword">super</span> viewDidLoad];</div><div class="line">    [<span class="keyword">self</span> calculateGreatestCommonDivisorP:<span class="number">30</span> q:<span class="number">6</span>]; <span class="comment">//欧几里德算法:求两个数的最大公约数</span></div><div class="line">&#125;</div><div class="line"><span class="meta">#pragma mark - 欧几里德算法</span></div><div class="line"><span class="comment">/**</span></div><div class="line"> 计算两个非负整数 p 和 q 的最大公约数:若 q 是 0，则最大公约数为 p。否则，将 p 除以 q得到余数r，p和q的最大公约数即为q和 r 的最大公约数。</div><div class="line"> greatest common divisor: 最大公因子</div><div class="line"> */</div><div class="line">- (<span class="keyword">int</span>)calculateGreatestCommonDivisorP:(<span class="keyword">int</span>)p q:(<span class="keyword">int</span>)q &#123;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"p 和 q 的最大公约数============ %d"</span>, gcd(p, q));</div><div class="line">    <span class="keyword">return</span> gcd(p,q);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">int</span> gcd (<span class="keyword">int</span> p, <span class="keyword">int</span> q) &#123;</div><div class="line">    <span class="keyword">if</span> (q == <span class="number">0</span>) &#123;</div><div class="line">        <span class="keyword">return</span> p;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">int</span> r = p % q;</div><div class="line">    <span class="keyword">return</span> gcd(q, r);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<hr>
+<p>#####2. 找出数组中组大的元素<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">    [super viewDidLoad];</div><div class="line">    NSArray *<span class="keyword">array</span> = @[@<span class="number">2.6</span>, @<span class="number">3</span>, @<span class="number">9.6</span>, @<span class="number">8</span>, @<span class="number">5</span>, @<span class="number">6</span>];</div><div class="line">    [self getMaxNumInArray:<span class="keyword">array</span>];    <span class="comment">//找出数组中组大的元素</span></div><div class="line">&#125;</div><div class="line">- (NSNumber *)getMaxNumInArray:(NSArray *)<span class="keyword">array</span></div><div class="line"> &#123;</div><div class="line">    <span class="keyword">double</span> <span class="built_in">max</span> = [<span class="keyword">array</span>[<span class="number">0</span>] doubleValue];</div><div class="line">    <span class="built_in">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="keyword">array</span>.count; i ++) &#123;</div><div class="line">        <span class="built_in">if</span> ([<span class="keyword">array</span>[i] doubleValue] &gt; <span class="built_in">max</span>) &#123;</div><div class="line">            <span class="built_in">max</span> = [<span class="keyword">array</span>[i] doubleValue];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    NSLog(@<span class="string">"MaxNumInArray===========%@"</span>, @(<span class="built_in">max</span>));</div><div class="line">    <span class="built_in">return</span> @(<span class="built_in">max</span>);</div><div class="line">&#125;</div><div class="line">注:这里不能直接用 NSNumber, 直接用 NSNumber 浮点数会出错.</div></pre></td></tr></table></figure></p>
+<p>#####3. 计算数组元素的平均值<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">    [<span class="keyword">super</span> viewDidLoad];</div><div class="line">    <span class="built_in">NSArray</span> *array = @[@<span class="number">2.6</span>, @<span class="number">3</span>, @<span class="number">9.6</span>, @<span class="number">8</span>, @<span class="number">5</span>, @<span class="number">6</span>];</div><div class="line">    [<span class="keyword">self</span> calculateAverageInArray:array];    <span class="comment">// 计算数组元素的平均值</span></div><div class="line">&#125;</div><div class="line">- (<span class="built_in">NSNumber</span> *)calculateAverageInArray:(<span class="built_in">NSArray</span> *)array &#123;</div><div class="line">    <span class="built_in">NSInteger</span> length = array.count;</div><div class="line">    <span class="keyword">double</span> sum = <span class="number">0.0</span>;</div><div class="line">    <span class="keyword">double</span> average = <span class="number">0.0</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="built_in">NSInteger</span> i = <span class="number">0</span>; i &lt; length; i ++) &#123;</div><div class="line">        sum += [array[i] doubleValue];</div><div class="line">        average = sum / length;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"calculateAverage===========%@"</span>, @(average));</div><div class="line">    <span class="keyword">return</span> @(average);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>#####4. 复制数组</p>
+<p>######注:示例数组中是NSNumber类型元素,其它类型需要另写方法<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">    [<span class="keyword">super</span> viewDidLoad];</div><div class="line">    [<span class="keyword">self</span> copyArray:array];     <span class="comment">// 复制数组:示例数组中是数字</span></div><div class="line">&#125;</div><div class="line">- (<span class="built_in">NSArray</span> *)copyArray:(<span class="built_in">NSArray</span> *)array &#123;</div><div class="line">    <span class="built_in">NSInteger</span> length = array.count;</div><div class="line">    <span class="built_in">NSMutableArray</span> * copyArrayM = [<span class="built_in">NSMutableArray</span> array];</div><div class="line">    <span class="keyword">for</span> (<span class="built_in">NSInteger</span> i = <span class="number">0</span>; i &lt; length; i ++) &#123;</div><div class="line">        copyArrayM[i] = array[i];</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">NSArray</span> *copyArray = copyArrayM;</div><div class="line">    <span class="keyword">return</span> copyArray;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>#####5. 颠倒数组元素的顺序<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">    [<span class="keyword">super</span> viewDidLoad];</div><div class="line">    [<span class="keyword">self</span> reverseArray:array];  <span class="comment">// 颠倒数组元素的顺序</span></div><div class="line">&#125;</div><div class="line">- (<span class="built_in">NSArray</span> *)reverseArray:(<span class="built_in">NSArray</span> *)array &#123;</div><div class="line">    <span class="built_in">NSInteger</span> N = array.count;</div><div class="line">    <span class="built_in">NSMutableArray</span> *arrayM = [<span class="built_in">NSMutableArray</span> array];</div><div class="line">    <span class="keyword">for</span> (<span class="built_in">NSInteger</span> i = <span class="number">0</span>; i &lt; N; i ++) &#123;</div><div class="line">        [arrayM addObject:array[i]];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span> (<span class="built_in">NSInteger</span> i = <span class="number">0</span>; i &lt; N/<span class="number">2</span>; i++) &#123;</div><div class="line">        <span class="built_in">NSNumber</span> *temp = arrayM[i];</div><div class="line">        arrayM[i] = arrayM[N<span class="number">-1</span>-i];</div><div class="line">        arrayM[N-i<span class="number">-1</span>] = temp;</div><div class="line">    &#125;</div><div class="line">    array = arrayM;</div><div class="line">    <span class="keyword">return</span> array;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<hr>
+<p>———–典型静态方法的实现————-</p>
+<p>#####6. 计算一个数的绝对值:浮点数和整数<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">    [<span class="keyword">super</span> viewDidLoad];</div><div class="line">    <span class="built_in">NSNumber</span> *numAbs = [<span class="keyword">self</span> calculateNumAbs:<span class="number">-234</span>];</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"calculateDoubleAbs========%@"</span>, numAbs);</div><div class="line">&#125;</div><div class="line">- (<span class="built_in">NSNumber</span> *)calculateNumAbs:(<span class="keyword">double</span>)x &#123;</div><div class="line">    <span class="keyword">if</span> (x&lt;<span class="number">0.0</span>) &#123;</div><div class="line">        <span class="keyword">return</span> @(-x);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">return</span> @(x);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>#####7. 判定一个数是否是素数:prime number<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">    [<span class="keyword">super</span> viewDidLoad];</div><div class="line">    <span class="built_in">BOOL</span> isPrime = [<span class="keyword">self</span> isPrime:<span class="number">17</span>];   <span class="comment">// 判定一个数是否是素数</span></div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"isPrime===========%d"</span>, isPrime);</div><div class="line">&#125;</div><div class="line">- (<span class="built_in">BOOL</span>)isPrime:(<span class="built_in">NSInteger</span>)N &#123;</div><div class="line">    <span class="keyword">if</span> (N &lt; <span class="number">2</span>) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span> (<span class="built_in">NSInteger</span> i = <span class="number">2</span>; i*i &lt;= N; i++) &#123;</div><div class="line">        <span class="keyword">if</span> (N % i == <span class="number">0</span>) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>#####8. 计算平方根(牛顿迭代法)<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">    [<span class="keyword">super</span> viewDidLoad];</div><div class="line">    <span class="keyword">double</span> numSqrt = [self <span class="string">calculateSqrt:</span><span class="number">-1</span>];</div><div class="line">    NSLog(@<span class="string">"numSqrt=========%f"</span>, numSqrt);</div><div class="line">&#125;</div><div class="line">- (<span class="keyword">double</span>)<span class="string">calculateSqrt:</span>(<span class="keyword">double</span>)c &#123;</div><div class="line">    <span class="keyword">if</span> (c &lt; <span class="number">0</span>) &#123;</div><div class="line">        <span class="keyword">return</span> NAN;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">double</span> err = <span class="number">1e-15</span>;</div><div class="line">    <span class="keyword">double</span> t = c;</div><div class="line">    <span class="keyword">while</span> (fabs(t - c/t) &gt; err * t) &#123;</div><div class="line">        t = (c<span class="regexp">/t + t) /</span> <span class="number">2.0</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> t;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>#####9. 计算直角三角形的斜边<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">    [<span class="keyword">super</span> viewDidLoad];</div><div class="line">    <span class="keyword">double</span> hypotenuse = [self <span class="string">calculateHypotenuse:</span><span class="number">5</span> :<span class="number">12</span>];</div><div class="line">    NSLog(@<span class="string">"hypotenuse=========%f"</span>, hypotenuse);</div><div class="line">&#125;</div><div class="line">- (<span class="keyword">double</span>)<span class="string">calculateHypotenuse:</span>(<span class="keyword">double</span>)<span class="string">a :</span>(<span class="keyword">double</span>)b &#123;</div><div class="line">    <span class="keyword">return</span> sqrt(a*a + b*b);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>#####10. 计算调和级数<br><figure class="highlight axapta"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">    [<span class="keyword">super</span> viewDidLoad];</div><div class="line">    <span class="keyword">double</span> HarmonicSeries = [self calculateHarmonicSeries:<span class="number">5</span>];</div><div class="line">    NSLog(@<span class="string">"HarmonicSeries=========%f"</span>, HarmonicSeries);</div><div class="line">&#125;</div><div class="line">- (<span class="keyword">double</span>)calculateHarmonicSeries:(NSInteger)N &#123;</div><div class="line">    <span class="keyword">double</span> <span class="keyword">sum</span> = <span class="number">0.0</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; i++) &#123;</div><div class="line">        <span class="keyword">sum</span> += <span class="number">1.0</span> / i;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">sum</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>#####11. 二分查找的递归实现<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">注: 二分查找的递归实现: 数组内数字大小是有序的(从大到小)</div><div class="line">- (void)viewDidLoad &#123;</div><div class="line">    [<span class="keyword">super</span> viewDidLoad];</div><div class="line">    NSArray *intArray = @[@2, @3, @4, @10, @19, @20];</div><div class="line">    NSInteger rankNum = [<span class="keyword">self</span> <span class="symbol">rank:</span><span class="number">20</span> <span class="symbol">:intArray</span>];</div><div class="line">    NSLog(@<span class="string">"rankNum=========%ld"</span>, (long)rankNum);</div><div class="line">&#125;</div><div class="line">- (NSInteger)<span class="symbol">rank:</span>(NSInteger)key <span class="symbol">:</span>(NSArray&lt;NSNumber *&gt; *)array &#123;</div><div class="line">    <span class="keyword">return</span> [<span class="keyword">self</span> <span class="symbol">rank:</span>key <span class="symbol">:array</span> <span class="symbol">:</span><span class="number">0</span> <span class="symbol">:array</span>.count - <span class="number">1</span>];</div><div class="line">&#125;</div><div class="line">- (NSInteger)<span class="symbol">rank:</span>(NSInteger)key <span class="symbol">:</span>(NSArray *)array <span class="symbol">:</span>(NSInteger)low <span class="symbol">:</span>(NSInteger)high &#123;</div><div class="line">    <span class="regexp">//</span>如果key存在于a[]中，它的索引不会小于low且不会大于high</div><div class="line">    <span class="keyword">if</span> (low &gt; high) &#123;</div><div class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    NSInteger mid = low + (high - low) / <span class="number">2</span>;</div><div class="line">    <span class="keyword">if</span> (key &lt; [array[mid] integerValue]) &#123;  <span class="regexp">//</span>若小于array[mid],则往前查找</div><div class="line">        <span class="keyword">return</span> [<span class="keyword">self</span> <span class="symbol">rank:</span>key <span class="symbol">:array</span> <span class="symbol">:low</span> <span class="symbol">:mid-</span><span class="number">1</span>];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (key &gt; [array[mid] integerValue]) &#123; <span class="regexp">//</span>若大于array[mid],则往后查找</div><div class="line">        <span class="keyword">return</span> [<span class="keyword">self</span> <span class="symbol">rank:</span>key <span class="symbol">:array</span> <span class="symbol">:mid+</span><span class="number">1</span> <span class="symbol">:high</span>];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">return</span> mid;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">关于递归<span class="symbol">:</span>编写递归代码时最重要的有以下三点</div><div class="line"><span class="number">1</span>. 递归总有一个最简单的情况——方法的第一条语句总是一个包含 <span class="keyword">return</span> 的条件语句。</div><div class="line"><span class="number">2</span>. 递归调用总是去尝试解决一个规模更小的子问题，这样递归才能收敛到最简单的情况。上面的代码中，第四个参数和第三个参数的差值一直在缩小。</div><div class="line"><span class="number">3</span>. 递归调用的父问题和尝试解决的子问题之间不应该有交集。上面的代码中，两个子问题各自操作的数组部分是不同的。</div></pre></td></tr></table></figure></p>
+<hr>
+<p>———–随机数———</p>
+<p>#####12. 随机返回 [a,b) 之间的一个 double 值<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">    [<span class="keyword">super</span> viewDidLoad];</div><div class="line">    <span class="keyword">double</span> doubleRandom = [<span class="keyword">self</span> uniform:<span class="number">1</span> :<span class="number">3</span>];</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"doubleRandom=========%f"</span>, doubleRandom);</div><div class="line">&#125;</div><div class="line">- (<span class="keyword">double</span>)uniform:(<span class="keyword">double</span>)a :(<span class="keyword">double</span>)b &#123;</div><div class="line">    <span class="meta">#define ARC4RANDOM_MAX      1000000</span></div><div class="line">    <span class="keyword">return</span> a + ((<span class="keyword">double</span>)(arc4random()%ARC4RANDOM_MAX)/ARC4RANDOM_MAX) * (b-a);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>#####13. 随机返回 [0,N-1] 之间的整数,值域:[0,N-1]<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">    [<span class="keyword">super</span> viewDidLoad];</div><div class="line">    <span class="built_in">NSInteger</span> intRandomZeroToHigh = [<span class="keyword">self</span> arc4randomHigh:<span class="number">5</span>];</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"intRandomZeroToHigh=========%ld"</span>, (<span class="keyword">long</span>)intRandomZeroToHigh);</div><div class="line">&#125;</div><div class="line">- (<span class="built_in">NSInteger</span>)arc4randomHigh:(<span class="built_in">NSInteger</span>)high &#123;</div><div class="line">    <span class="keyword">return</span> arc4random() % high;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>#####14. 随机返回 [low,high-1] 之间的整数,值域:[low,high]<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">    [<span class="keyword">super</span> viewDidLoad];</div><div class="line">    <span class="built_in">NSInteger</span> intRandomLowToHigh = [<span class="keyword">self</span> arc4randomLow:<span class="number">3</span> high:<span class="number">5</span>];</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"intRandomLowToHigh=========%ld"</span>, (<span class="keyword">long</span>)intRandomLowToHigh);</div><div class="line">&#125;</div><div class="line">- (<span class="built_in">NSInteger</span>)arc4randomLow:(<span class="built_in">NSInteger</span>)low high:(<span class="built_in">NSInteger</span>)high &#123;</div><div class="line">    <span class="keyword">return</span> low + arc4random() % (high-low);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>#####15. 根据离散概率随机返回的 int 值(出现 i 的概率为 a[i])<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">    [<span class="keyword">super</span> viewDidLoad];</div><div class="line">    <span class="built_in">NSArray</span> *discreteArray = @[@<span class="number">0.2</span>,@<span class="number">0.09</span>,@<span class="number">0.3</span>,@<span class="number">0.11</span>,@<span class="number">0.3</span>]; <span class="comment">// a[]中各元素之和必须等于1</span></div><div class="line">    <span class="built_in">NSInteger</span> discrete = [<span class="keyword">self</span> discrete:discreteArray];</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"discrete=======%zd"</span>, discrete);</div><div class="line">&#125;</div><div class="line">- (<span class="built_in">NSInteger</span>)discrete:(<span class="built_in">NSArray</span> *)array &#123;</div><div class="line">    <span class="comment">// a[]中各元素之和必须等于1</span></div><div class="line">    <span class="meta">#define ARC4RANDOM_MAX      1000000</span></div><div class="line">    <span class="keyword">double</span> r = (<span class="keyword">double</span>)(arc4random()%ARC4RANDOM_MAX)/ARC4RANDOM_MAX;    <span class="comment">// [0,1)随机数</span></div><div class="line">    <span class="keyword">double</span> sum = <span class="number">0.0</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="built_in">NSInteger</span> i = <span class="number">0</span>; i &lt; array.count; i++) &#123;</div><div class="line">        sum = sum + [array[i] doubleValue];</div><div class="line">        <span class="keyword">if</span> (sum &gt;= r) &#123;</div><div class="line">            <span class="keyword">return</span> i;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>#####16. 随机将 double 数组中的元素排序<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">    [<span class="keyword">super</span> viewDidLoad];</div><div class="line">    <span class="built_in">NSArray</span> *beforeShuffleArray = @[@<span class="number">2</span>,@<span class="number">10.09</span>,@<span class="number">2.3</span>,@<span class="number">0.11</span>,@<span class="number">6.3</span>];</div><div class="line">    <span class="built_in">NSArray</span> *afterShuffleArray = [<span class="keyword">self</span> shuffle:beforeShuffleArray];</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"afterShuffleArray = %@"</span>, afterShuffleArray);</div><div class="line">&#125;</div><div class="line"><span class="comment">/// 随机将 double 数组中的元素排序</span></div><div class="line">- (<span class="built_in">NSMutableArray</span> *)shuffle:(<span class="built_in">NSArray</span> *)array &#123;</div><div class="line">    <span class="built_in">NSMutableArray</span> *arrayM = [<span class="built_in">NSMutableArray</span> array];</div><div class="line">    <span class="keyword">for</span> (<span class="built_in">NSNumber</span> *num <span class="keyword">in</span> array) &#123;</div><div class="line">        [arrayM addObject:num];</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">NSInteger</span> N = arrayM.count;</div><div class="line">    <span class="keyword">for</span> (<span class="built_in">NSInteger</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</div><div class="line">        <span class="comment">// 将a[i]和a[i..N-1]中任意一个元素交换</span></div><div class="line">        <span class="built_in">NSInteger</span> r = i + arc4random() % (N-i);</div><div class="line">        <span class="keyword">double</span> temp = [arrayM[i] doubleValue];</div><div class="line">        arrayM[i] = arrayM[r];</div><div class="line">        arrayM[r] = @(temp);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> arrayM;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/07/LBS001/" rel="next" title="游戏开发笔记2(iOS)">
+                <i class="fa fa-chevron-left"></i> 游戏开发笔记2(iOS)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/24/Mac-终端操作/" rel="prev" title="Mac-终端操作">
+                Mac-终端操作 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/10/24/算法(一)/"
+           data-title="算法(一)" data-url="http://yoursite.com/2017/10/24/算法(一)/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="刘宏立" />
+          <p class="site-author-name" itemprop="name">刘宏立</p>
+           
+              <p class="site-description motion-element" itemprop="description">如果不曾相见,人们就不会相恋</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘宏立</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"cellgit"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

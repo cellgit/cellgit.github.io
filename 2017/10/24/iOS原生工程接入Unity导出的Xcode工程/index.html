@@ -1,0 +1,920 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="提示:2017年7月13日更新
+相关文章:1&amp;gt;. IL2CPP 构建大小优化
+前言:项目iOS原生工程是LBS的开发,在iOS原生和Unity的Xcode工程进行整合方面,网上多是将Unity的Xcode工程导入到自己的原生项目中,而对于iOS原生工程接入Unity导出的Xcode工程几乎找不到,虽然相对更简单.第一次整合iOS-Unity项目,会报很多错误,报到让自己怀疑人生.还好,最终找">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS原生工程接入Unity导出的Xcode工程">
+<meta property="og:url" content="http://yoursite.com/2017/10/24/iOS原生工程接入Unity导出的Xcode工程/index.html">
+<meta property="og:site_name" content="刘宏立博客">
+<meta property="og:description" content="提示:2017年7月13日更新
+相关文章:1&amp;gt;. IL2CPP 构建大小优化
+前言:项目iOS原生工程是LBS的开发,在iOS原生和Unity的Xcode工程进行整合方面,网上多是将Unity的Xcode工程导入到自己的原生项目中,而对于iOS原生工程接入Unity导出的Xcode工程几乎找不到,虽然相对更简单.第一次整合iOS-Unity项目,会报很多错误,报到让自己怀疑人生.还好,最终找">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-3804388bfb34b229.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-c2ab25d3ed30f0b8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-31268adf1e637b7e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-76fd878eae78a9ea.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-cbce37f90a0c6591.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-9a2caf9af622dcfd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-1fb220e0d7860eea.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-a1effbbe48e41790.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-55c26cf51109bfa8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-9a31feb39d75595e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-9d2f909de38274fe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-85fa1aaf8a7a1837.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-8f91025fdb330a51.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-e206a71467a2b146.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-078e205ba040b34c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-98bf2a9d52261209.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-2a03a06080c5124d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-fffc67482a6ba93d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-6b64b7da476fc8c5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-3f6f5bd21aa5393b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-87ade9950856a186.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-7216b8c3415fc7d9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-37aad146f05a4036.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-28abe064d3b0b944.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-0a68e82537865ccc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-c394a05fdf820213.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-09f03b3162b42cef.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-6e174d6137cf074f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-05b18478f63f1c81.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-d43df25b44163d3a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-01a4082ce0c59881.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-63d60db1c1da7b3a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-e83ac734a435d542.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-481a8826028f15d7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-e7ac5e93b08102c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-90797599e1562c2c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-4fde6d77fc440921.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-7dade472d51a57b0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-9fb42bb3fe9a650b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2553151-5ffc3fb722129f89.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-10-23T18:18:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS原生工程接入Unity导出的Xcode工程">
+<meta name="twitter:description" content="提示:2017年7月13日更新
+相关文章:1&amp;gt;. IL2CPP 构建大小优化
+前言:项目iOS原生工程是LBS的开发,在iOS原生和Unity的Xcode工程进行整合方面,网上多是将Unity的Xcode工程导入到自己的原生项目中,而对于iOS原生工程接入Unity导出的Xcode工程几乎找不到,虽然相对更简单.第一次整合iOS-Unity项目,会报很多错误,报到让自己怀疑人生.还好,最终找">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2553151-3804388bfb34b229.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/10/24/iOS原生工程接入Unity导出的Xcode工程/"/>
+
+
+
+
+
+  <title> iOS原生工程接入Unity导出的Xcode工程 | 刘宏立博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?1eef4774f136a603e75fbfcecc58b620";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">刘宏立博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-jianshu">
+          <a href="http://www.jianshu.com/u/4adfcdce1900/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            简书
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/24/iOS原生工程接入Unity导出的Xcode工程/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="刘宏立">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/uploads/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="刘宏立博客">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="刘宏立博客" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS原生工程接入Unity导出的Xcode工程
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-24T02:04:53+08:00">
+                2017-10-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/24/iOS原生工程接入Unity导出的Xcode工程/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/10/24/iOS原生工程接入Unity导出的Xcode工程/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>提示:<br><code>2017年7月13日更新</code></p>
+<p>相关文章:<br>1&gt;. <a href="https://support.unity3d.com/hc/zh-cn/articles/208412186-IL2CPP-构建大小优化" target="_blank" rel="external">IL2CPP 构建大小优化</a></p>
+<p>前言:项目iOS原生工程是LBS的开发,在iOS原生和Unity的Xcode工程进行整合方面,网上多是将Unity的Xcode工程导入到自己的原生项目中,而对于iOS原生工程接入Unity导出的Xcode工程几乎找不到,虽然相对更简单.第一次整合iOS-Unity项目,会报很多错误,报到让自己怀疑人生.还好,最终找到了一个很简单的整合流程.项目要求不一样,过程也许不同,不过,万一对你有帮助,就会省去很多时间.文章旨在帮助还在iOS-Unity整合的路上苦苦挣扎的程序员脱离错误的红海,同时详细记录自己的实现步骤.</p>
+<p>注意:在选择 Mono2x 和 IL2CPP 时操作步骤稍有不同: Mono2x 导出工程后只需要在 build settings 将  <code>HEADER_SEARCH_PATHS</code> 添加 $(inherited),其余不可以修改,否则可能会报错误;在 IL2CPP 设置状态下,可以将警告(在下文)内容全部在 build settings 中对应设置.<br>前提条件: 1. 工程是以Unity工程为主,如游戏的开发. 2. 我使用了cocoapods,如果不知道,这个将是你填的一个天坑.<br>详细步骤放入下:为了展现更直接,主要以截图呈现<br>1.Unity导出Xcode工程前的设置1:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2553151-3804388bfb34b229.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="001UnityBuildSettings.png"><br>2.Unity导出Xcode工程前的设置2:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2553151-c2ab25d3ed30f0b8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="002UnitySetting.png"></p>
+<p>3.Unity导出Xcode工程前的设置3:CompanyName和ProductName根据自己项目填写</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2553151-31268adf1e637b7e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="003UnityPlayerSetting1.png"></p>
+<p>4.Unity导出Xcode工程前的设置4:<br>注意:最好用你之前原生项目的Bundle Identifier,因为,你的项目中也许用到了第三方,在第三方的后台已经填写了Bundle Identifier</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2553151-76fd878eae78a9ea.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="004UnityPlayerSettings2.png"></p>
+<p>5.Unity导出Xcode工程前的设置5:最好把这一项选上<br><img src="http://upload-images.jianshu.io/upload_images/2553151-cbce37f90a0c6591.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="004UnityPlayerSettings3.png"></p>
+<p>6.Unity导出Xcode工程前的设置6:如果你的Unity工程没有不兼容的地方,应该很顺利导出,如果出现Unity的代码或资源不兼容,赶快找相关负责人进行解决,我的就出现了代码和图片资源的报错<br><img src="http://upload-images.jianshu.io/upload_images/2553151-9a2caf9af622dcfd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="005UnitySetting.png"></p>
+<p>7.Unity的Xcode工程导出成功后,打开终端,切换到对应的根目录:如图中的client<br><img src="http://upload-images.jianshu.io/upload_images/2553151-1fb220e0d7860eea.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="007TerminalChangePath.png"></p>
+<p>8.pod init 创建podfile文件<br><img src="http://upload-images.jianshu.io/upload_images/2553151-a1effbbe48e41790.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="008TerminalPodInit.png"></p>
+<p>9.打开podfile文件,按格式写入需要pod的第三方库,我用到的第三方库如下:</p>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">platform</span> :ios, <span class="string">'8.0'</span></div><div class="line"></div><div class="line">target <span class="string">'Unity-iPhone'</span> <span class="keyword">do</span></div><div class="line"></div><div class="line">pod <span class="string">'AMap3DMap'</span></div><div class="line">pod <span class="string">'AMapLocation'</span></div><div class="line">pod <span class="string">'AMapSearch'</span></div><div class="line">pod <span class="string">'Masonry'</span></div><div class="line">pod <span class="string">'pop'</span></div><div class="line">pod <span class="string">'AFNetworking'</span></div><div class="line">pod <span class="string">'YYModel'</span></div><div class="line"></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/2553151-55c26cf51109bfa8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="009TerminalThirdName.png"></p>
+<p>10.打开终端,pod install,完成之后会看到如下图所示的黄色字体的警告: Smart quotes的警告是因为我们操作podfile文件用的是文本格式,如果想去掉这个警告,可以使用sublime或Xcode操作podfile文件,保证podfile文件的单引号是英文格式的.<br>特别重要的是以下Release(一定要设置Release状态,其它状态可以设置也可以不设置) 状态下的四个警告,其中”HEADER_SEARCH_PATHS”最重要,这个一定要在BuildSettings中添加一个$(inherited)<br>依次在BuildSettings中找到:Other_CFLAGS和OTHER_LDFLAGS,并分别添加$(inherited)<br>如果添加这三项后没有报错,就可以了,但是如果依然有报错,就将BuildSettings中的ARCHS也添加$(inherited),之后如果再有报错,就要看报错内容具体是什么.</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2553151-9a31feb39d75595e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="010TeiminalAlertInfo..png"></p>
+<p>11.打开白色的workspace(工作空间)文件,运行,看是否报错,我运行的时候报错是我的iPhone版本低,将Xcode运行的手机系统版本设置降低到小于等于你的设备的iOS系统版本即可.</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2553151-9d2f909de38274fe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="011XcodeProject.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2553151-85fa1aaf8a7a1837.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="012XcodeAlert.png"><br>12.另一个错误是没有选择开发team,如下图选择即可</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2553151-8f91025fdb330a51.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="013XcodeSetting.png"></p>
+<p>13.这个错误是因为在Unity原文件中写了必须要实现的方法(这个根据你的项目而定该实现哪种方法),我的将写好的代码文件直接拖进Xcode中即可.</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2553151-e206a71467a2b146.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="014XcodeError.png"></p>
+<p>14.需要解决上一步的错误问文件:(文件根据具体工程的调用方法而定)</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2553151-078e205ba040b34c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="015XcodeFile.png"></p>
+<p>15.设置Xcode Build Settings,此处是为了解决Unity导出的 Xcode 工程和 cocoapods 的配置不兼容的问题,就是上面 pod install 第三方库的时候报的警告问题: 如下图,我想导入 Masonry的头文件,但是不能导入,此时虽然我们的第三方框架安装了,但是还无法使用</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2553151-98bf2a9d52261209.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="016XcodeSettings.png"></p>
+<p>16.将项目设置为Release状态下:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2553151-2a03a06080c5124d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="016.1XcodeEditScheme01.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2553151-fffc67482a6ba93d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="016.2XcodeSchemeRelease.png"><br>17.在Build Settings下设置 HEADER_SEARCH_PATHS,添加一项并设置为:$(inherited)</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2553151-6b64b7da476fc8c5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="017XcodeBuildSettings.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2553151-3f6f5bd21aa5393b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="018XcodeThirdLib.png"></p>
+<ol>
+<li>并依次在Build Settings下设置: OTHER_CFLAGS, OTHER_LDFLAGS;并且都把值设置为:$(inherited)</li>
+</ol>
+<p>19.将自己的项目拖入到 Xcode导出的工程,注意只需要将根目录下的那个你写代码的文件夹拖进去即可,里面包含了你写的所有代码:如下图所示</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2553151-87ade9950856a186.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="019XcodeMapFile.png"></p>
+<p>20.这一步不同的项目会有不同,目的是跳转到我们用Xcode写的原生控制器中,主要代码如下:<br><figure class="highlight sqf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (<span class="variable">_mapVC</span> == <span class="literal">nil</span>) &#123;</div><div class="line">        <span class="variable">_mapVC</span> = [[BTMapVC alloc]init];</div><div class="line">    &#125;</div><div class="line">    UnityPause(<span class="literal">true</span>);</div><div class="line">    [UnityGetGLViewController() presentViewController:<span class="variable">_mapVC</span> animated:NO completion:<span class="literal">nil</span>];</div></pre></td></tr></table></figure></p>
+<p>如下图所示:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2553151-7216b8c3415fc7d9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="020XcodeUnityMapVC.png"></p>
+<p>21.发现一大堆错误,是因为我用了 pch 文件,而将 pch 文件拖入到新工程里,此时需要设置 pch 文件路径,这里我是将 Unity 导出的 Xcode 工程的 pch 文件里的内容复制到原生的 pch 文件里,然后再设置原生 pch 文件的路径,你也可以尝试将原生工程的 pch 文件内容复制到 Unity 导出工程的 pch 文件里:如下图</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2553151-37aad146f05a4036.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="021XcodeError.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2553151-28abe064d3b0b944.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="022XcodePch.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2553151-0a68e82537865ccc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="023XcodePch.png"></p>
+<p>22.我们将原生工程文件拖进 Unity 导出的 Xcode 工程后,一个工程就出现了两个main文件,一个是 main.m,一个是 main.mm,会报错如下图,因为我们是以 Unity 为主的项目,因此删除掉 main.m</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2553151-c394a05fdf820213.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="024XcodeError.png"></p>
+<p>23.如果出现以下错误可能是因为你没有将 Unity导出的 Xcode 工程的 pch 文件内容复制到你设置的 pch 文件里,报错如下图</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2553151-09f03b3162b42cef.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="025XcodeError.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2553151-6e174d6137cf074f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="026XcodePch.png"></p>
+<p>24.我开发的原生项目是LBS,跳转的时候会进行定位,需要设置几个选项,如果不设置跳转的时候会崩溃:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2553151-05b18478f63f1c81.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="027XcodeBreakPoint.png"><br>设置Background Mode,并在 Info.plist 设置: NSLocationWhenInUseUsageDescription或者 NSLocationAlwaysUsageDescription<br><img src="http://upload-images.jianshu.io/upload_images/2553151-d43df25b44163d3a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="28XcodeSetting.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2553151-01a4082ce0c59881.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="infoPlist定位权限设置.png"></p>
+<p>25.在跳转到原生工程界面的时候要将 Unity 暂停,在从原生跳回 Unity 界面时要将Unity 取消暂停,主要代码和图如下:<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[self <span class="string">dismissViewControllerAnimated:</span>NO <span class="string">completion:</span>^&#123;</div><div class="line">        UnityPause(<span class="literal">false</span>);</div><div class="line">    &#125;];</div></pre></td></tr></table></figure></p>
+<p>如下图所示:<br><img src="http://upload-images.jianshu.io/upload_images/2553151-63d60db1c1da7b3a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="030XcodeBackUnity.png"></p>
+<p>26.因为是游戏要设置全局横屏,代码和图如下:<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 设置全局横屏</span></div><div class="line">- (<span class="built_in">UIInterfaceOrientationMask</span>)application:(<span class="built_in">UIApplication</span> *)application supportedInterfaceOrientationsForWindow:(<span class="built_in">UIWindow</span> *)window &#123;</div><div class="line">    <span class="keyword">return</span> <span class="built_in">UIInterfaceOrientationMaskLandscapeRight</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2553151-e83ac734a435d542.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="031UnityAppController.png"></p>
+<p>27.如果在Unity导出 Xcode 工程时,你的 Bundle Identifier 和在高德注册的不一致,这里需要修改 Bundle Identifier,如下图:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2553151-481a8826028f15d7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="032XcodeMapLocation.png"></p>
+<p>28.如果报错ApiKey,需要在 UnityAppController进行设置,代码和图如下:<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#warning 这个地方设置 apiKey</span></div><div class="line">    <span class="comment">//*****************************************//</span></div><div class="line">    <span class="comment">// 解决地图呈现网格问题</span></div><div class="line">    [[AMapServices sharedServices] setEnableHTTPS:<span class="literal">YES</span>];</div><div class="line">    <span class="keyword">if</span> ([APIKey length] == <span class="number">0</span>)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">NSString</span> *reason = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"apiKey为空，请检查key是否正确设置。"</span>];</div><div class="line">        <span class="built_in">UIAlertView</span> *alert = [[<span class="built_in">UIAlertView</span> alloc] initWithTitle:<span class="string">@"提示"</span> message:reason delegate:<span class="literal">nil</span> cancelButtonTitle:<span class="string">@"OK"</span> otherButtonTitles:<span class="literal">nil</span>, <span class="literal">nil</span>];</div><div class="line">        </div><div class="line">        [alert show];</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    [AMapServices sharedServices].apiKey = (<span class="built_in">NSString</span> *)APIKey;</div><div class="line">    <span class="comment">//*****************************************//</span></div></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2553151-e7ac5e93b08102c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="033errorAppKey.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2553151-90797599e1562c2c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="034XcodeApiKeyError.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2553151-4fde6d77fc440921.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="035XcodeApiKeyError.png"></p>
+<p>###2017年7月13日更新:<br>前段时间Unity导出的il2cpp模式的工程在登录时无法加载场景,因此这段时间以来都是在mono2x模式下进行写的代码,随着最近一次更新,导出的Xcode文件报错:</p>
+<p><code>Unable to insert branch island. No insertion point available. for architecture armv7</code></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2553151-7dade472d51a57b0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Mono2X下编译报错信息.png"></p>
+<p>网上说是由于导出的Xcode文件:Data/Managed/Assembly-CSharp.dll的文件过大导致的(上次3.4M,只比上次更新大了0.1M),说是让拆代码进行解决,暂时未处理,打算继续回归il2cpp模式,将加载场景的代码进行注释,因为我的开发是LBS部分,只需要能和Unity进行通讯即可继续开发(等待拆代码中….)</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2553151-9fb42bb3fe9a650b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Assembly-CSharp.dll达到3.5M时Mono2X下编译报错.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2553151-5ffc3fb722129f89.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="注释Unity加载场景代码.png"></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/24/Mac-终端操作/" rel="next" title="Mac-终端操作">
+                <i class="fa fa-chevron-left"></i> Mac-终端操作
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/24/CocoaPods安装/" rel="prev" title="CocoaPods安装">
+                CocoaPods安装 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/10/24/iOS原生工程接入Unity导出的Xcode工程/"
+           data-title="iOS原生工程接入Unity导出的Xcode工程" data-url="http://yoursite.com/2017/10/24/iOS原生工程接入Unity导出的Xcode工程/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="刘宏立" />
+          <p class="site-author-name" itemprop="name">刘宏立</p>
+           
+              <p class="site-description motion-element" itemprop="description">如果不曾相见,人们就不会相恋</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘宏立</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"cellgit"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
